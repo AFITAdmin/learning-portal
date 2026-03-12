@@ -15,7 +15,10 @@ const io = new Server(server);
 
 // PostgreSQL pool
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 // -----------------------------
