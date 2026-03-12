@@ -1,0 +1,144 @@
+/* Global layout */
+
+body{
+font-family: "Segoe UI", Arial, sans-serif;
+background:#2f2f2f;
+margin:0;
+padding:0;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+/* Main slide frame */
+
+#slideContainer{
+width:1000px;
+max-width:90vw;
+background:rgb(213, 243, 226);
+padding:60px;
+border-radius:12px;
+box-shadow:0 15px 40px rgba(0,0,0,0.15);
+min-height:500px;
+transition:all 0.3s ease;
+}
+
+/* Titles */
+
+#slideContainer h2{
+font-size:38px;
+margin-bottom:25px;
+color:#222;
+}
+
+/* Text */
+
+#slideContainer p{
+font-size:22px;
+line-height:1.6;
+color:#333;
+}
+
+/* Bullet lists */
+
+ul{
+margin-top:25px;
+padding-left:30px;
+}
+
+li{
+font-size:21px;
+margin-bottom:12px;
+}
+
+/* Discussion slides */
+
+.discussion-box{
+margin-top:30px;
+padding:25px;
+background:#f5f8ff;
+border-left:6px solid #4a6cf7;
+border-radius:6px;
+font-size:21px;
+}
+
+/* Activity instruction */
+
+.activity-box{
+margin-top:30px;
+padding:25px;
+background:#93c5f1;
+border-left:6px solid #f3214f;
+border-radius:6px;
+font-size:21px;
+}
+
+/* Cloze options */
+
+.option{
+display:inline-block;
+padding:12px 18px;
+margin:8px;
+background:#e4e9f2;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-size:18px;
+transition:all 0.2s ease;
+}
+
+.option:hover{
+background:#d6dde8;
+transform:translateY(-2px);
+}
+
+/* Correct / incorrect states */
+
+.correct{
+background:#4CAF50 !important;
+color:white;
+}
+
+.incorrect{
+background:#e53935 !important;
+color:white;
+}
+
+/* Login panel */
+
+#loginPanel{
+position:absolute;
+top:30px;
+left:30px;
+background:white;
+padding:20px;
+border-radius:8px;
+box-shadow:0 6px 20px rgba(0,0,0,0.1);
+}
+
+#loginPanel input{
+padding:8px;
+font-size:16px;
+margin-right:8px;
+}
+
+#loginPanel button{
+padding:8px 14px;
+font-size:16px;
+cursor:pointer;
+}
+#slideContainer{
+animation:slideFade 0.3s ease;
+}
+
+@keyframes slideFade{
+from{
+opacity:0;
+transform:translateY(10px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}

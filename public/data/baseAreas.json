@@ -1,0 +1,80 @@
+[
+  {
+    "name": "GrowThroughoutLife",
+    "letter": "G",
+    "color": "#03953e",
+    "elements": [
+      "Seeking and Responding to Help and Feedback",
+      "Linking learning to your future",
+      "Embracing Challenges: Growing Through New Experiences",
+      "Recognising and Recording Achievements",
+      "Understanding Ourselves and Others",
+      "Celebrating Achievements and Reflections"
+    ]
+  },
+  {
+    "name": "ExplorePossibilities",
+    "letter": "E",
+    "color": "#de460d",
+    "elements": [
+      "Common Sources of Information about Labour Market",
+      "Classifying Jobs",
+      "Education and Career Progression",
+      "Identifying Personal Job Interests",
+      "Status in Careers",
+      "Recruitment"
+    ]
+  },
+  {
+    "name": "ManagingCareer",
+    "letter": "M",
+    "color": "#01478b",
+    "elements": [
+      "Understanding Career Choices",
+      "Creating Step-by-Step Career Plans",
+      "Backups and options",
+      "Achievements and Challenges",
+      "Transitions through life",
+      "Setbacks and Challenges"
+    ]
+  },
+  {
+    "name": "CreateOpportunities",
+    "letter": "C",
+    "color": "#ed8b00",
+    "elements": [
+      "Building Relationships",
+      "Taking Initiative",
+      "Jobs of the future",
+      "Relations and Communication",
+      "Role Models",
+      "Self employment & entrepreneurialism"
+    ]
+  },
+  {
+    "name": "BalanceWorkLife",
+    "letter": "B",
+    "color": "#5c2083",
+    "elements": [
+      "Work Life Balance",
+      "Life Stages",
+      "Work-Life Balance and Wellbeing",
+      "Money and Financial Decisions",
+      "Community Involvement, Charity Work, and Career Implications",
+      "Rights, Responsibilities, and Challenging Unfair Barriers"
+    ]
+  },
+  {
+    "name": "SeeTheBigPicture",
+    "letter": "S",
+    "color": "#ee4d97",
+    "elements": [
+      "Evaluating Information and Media Reliability",
+      "Understanding Labour Market Trends",
+      "The Impact of Science and Technology on Careers",
+      "Careers and the Environment",
+      "The Relationship Between Career, Community, and Society Market Trends",
+      "Careers and Society"
+    ]
+  }
+]

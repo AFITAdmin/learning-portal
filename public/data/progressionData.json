@@ -1,0 +1,82 @@
+{
+  "PDS 2": {
+    "GrowThroughoutLife": {
+      "title": "Growing Through Reflection and Openness",
+      "text": "I can recognise that learning and growth happen through reflection, challenge, and openness to different people and experiences.\n\nAt this stage, pupils begin to understand that personal growth happens not just through success, but through reflection and challenge. They explore how experiences help them grow and recognise learning as lifelong."
+    },
+    "ExplorePossibilities": {
+      "title": "Discovering Interests and Careers",
+      "text": "I can explore different jobs by thinking about what interests me, the skills they require, and how my school choices connect to future opportunities.\n\nPupils begin linking interests and subjects to possible careers and exploring the world of work."
+    },
+    "ManagingCareer": {
+      "title": "Understanding What a Career Means",
+      "text": "I can explore different career options and begin setting simple goals.\n\nPupils explore what a career means and recognise it is built over time."
+    },
+    "CreateOpportunities": {
+      "title": "Exploring Careers and Learning from Others",
+      "text": "I can understand how opportunities are created through relationships and teamwork.\n\nPupils learn that careers are built through collaboration and role models."
+    },
+    "BalanceWorkLife": {
+      "title": "Understanding Balance and Well-Being",
+      "text": "I can understand how work and life are connected and how balance affects well-being and opportunities.\n\nPupils explore how balance influences happiness and success."
+    },
+    "SeeTheBigPicture": {
+      "title": "Understanding the World of Work",
+      "text": "I can begin to recognise how trends, technology, and the environment influence work.\n\nPupils develop awareness of wider influences on careers."
+    }
+  },
+
+  "PDS 3": {
+    "GrowThroughoutLife": {
+      "title": "Embracing Feedback and Self-Awareness",
+      "text": "I can recognise how learning, feedback, and self-awareness help me grow.\n\nPupils reflect on strengths and areas for growth, building resilience and identity awareness."
+    },
+    "ExplorePossibilities": {
+      "title": "Broadening Horizons and Understanding Pathways",
+      "text": "I can explore a wide range of jobs, learning pathways, and qualifications.\n\nPupils investigate recruitment and broader pathways."
+    },
+    "ManagingCareer": {
+      "title": "Planning Ahead and Being Flexible",
+      "text": "I can build relationships and recognise creativity and leadership in building a career.\n\nPupils develop planning skills and adaptability."
+    },
+    "CreateOpportunities": {
+      "title": "Building Initiative and Leadership Skills",
+      "text": "I can take initiative and develop leadership and entrepreneurial thinking.\n\nPupils develop proactive attitudes and confidence."
+    },
+    "BalanceWorkLife": {
+      "title": "Recognising Responsibilities and Managing Balance",
+      "text": "I can recognise the importance of work-life balance and managing responsibilities.\n\nPupils build healthy habits and self-awareness."
+    },
+    "SeeTheBigPicture": {
+      "title": "Exploring How the World Shapes Careers",
+      "text": "I can understand how technology, society, and the economy influence careers.\n\nPupils think strategically about external influences."
+    }
+  },
+
+  "PDS 4": {
+    "GrowThroughoutLife": {
+      "title": "Taking Responsibility for Growth",
+      "text": "I can take responsibility for my growth by embracing feedback and setting learning goals.\n\nPupils take ownership of long-term development."
+    },
+    "ExplorePossibilities": {
+      "title": "Researching Careers and Preparing for Success",
+      "text": "I can research career options and understand recruitment processes.\n\nPupils prepare for applications and interviews."
+    },
+    "ManagingCareer": {
+      "title": "Making Decisions and Managing Change",
+      "text": "I can take responsibility for my career and adapt my strategies.\n\nPupils develop confident self-advocacy."
+    },
+    "CreateOpportunities": {
+      "title": "Taking Ownership and Leading with Confidence",
+      "text": "I can reflect on my progress and advocate for my goals.\n\nPupils strengthen independence and leadership capacity."
+    },
+    "BalanceWorkLife": {
+      "title": "Reflecting on Life, Work, and Financial Realities",
+      "text": "I can reflect on balancing work, life, well-being, finances, and responsibilities.\n\nPupils consider adult responsibilities and lifestyle decisions."
+    },
+    "SeeTheBigPicture": {
+      "title": "Evaluating Trends and Making Informed Decisions",
+      "text": "I can critically evaluate how trends shape career opportunities.\n\nPupils develop critical thinking and informed decision-making."
+    }
+  }
+}

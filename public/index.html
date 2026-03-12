@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>School Careers Lessons Resource System</title>
+
+<style>
+* { box-sizing: border-box; margin:0; padding:0; }
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #f4f4f9;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+h1 { margin-bottom: 10px; text-align:center; }
+.subtitle { margin-bottom:20px; text-align:center; font-size:1rem; color:#666; }
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.card {
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    cursor: pointer;
+    text-align: center;
+    padding: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    min-height: 160px;
+    justify-content: center;
+}
+
+.card:hover, .card:focus {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.card img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.card h2 { font-size: 0.85rem; text-align: center; }
+
+#levelsContainer {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+#backButton {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    background: #333;
+    color: #fff;
+    transition: all 0.4s ease;
+}
+
+#backButton:hover {
+    opacity: 0.85;
+    transform: scale(1.05);
+}
+
+#darkModeToggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px 18px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    background: #01478b;
+    color: #fff;
+    transition: all 0.8s ease;
+}
+
+#darkModeToggle:hover { opacity: 0.85; }
+
+body.dark { background: #121212; color: #f1f1f1; }
+body.dark .subtitle { color: #bbb; }
+body.dark .card { box-shadow: 0 4px 12px rgba(255,255,255,0.08); }
+body.dark #backButton { background:#f1f1f1; color:#121212; }
+
+.morph-out { animation: morphOut 0.5s forwards ease; }
+.morph-in { animation: morphIn 0.6s forwards cubic-bezier(.25,.8,.25,1); }
+
+@keyframes morphOut {
+    0% { opacity:1; transform:scale(1) translateY(0); filter:blur(0); }
+    100% { opacity:0; transform:scale(0.95) translateY(10px); filter:blur(4px); }
+}
+
+@keyframes morphIn {
+    0% { opacity:0; transform:scale(1.05) translateY(-10px); filter:blur(4px); }
+    100% { opacity:1; transform:scale(1) translateY(0); filter:blur(0); }
+}
+
+#infoPanel {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    min-height: 180px;
+    background: rgba(255,255,255,0.95);
+    border-top: 4px solid #01478b;
+    padding: 20px;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.1);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+#infoPanel.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+body.dark #infoPanel {
+    background: rgba(18,18,18,0.95);
+    border-top: 4px solid #5c2083;
+}
+
+#infoContent { max-width: 1200px; margin:auto; }
+#infoTitle { margin-bottom:10px; font-size:1.2rem; }
+#infoText { font-size:0.95rem; line-height:1.5; }
+
+@media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 500px) { .grid { grid-template-columns: 1fr; } }
+
+</style>
+</head>
+
+<body>
+
+<button id="darkModeToggle">Dark Mode</button>
+<h1>Careers Lessons Resource System</h1>
+<p class="subtitle">Select a card to navigate</p>
+<button id="backButton">Back</button>
+<div id="levelsContainer"></div>
+
+<div id="infoPanel">
+  <div id="infoContent">
+    <h2 id="infoTitle"></h2>
+    <p id="infoText"></p>
+  </div>
+</div>
+
+<script>
+
+let careersData = null;
+let progressionData = null;
+let levelHistory = [];
+let currentPDS = null;
+let infoResetTimeout = null;
+
+const levelsContainer = document.getElementById('levelsContainer');
+const backButton = document.getElementById('backButton');
+const darkModeToggle = document.getElementById('darkModeToggle');
+const infoPanel = document.getElementById("infoPanel");
+const infoTitle = document.getElementById("infoTitle");
+const infoText = document.getElementById("infoText");
+
+/* =========================
+   LOAD JSON FILES DYNAMICALLY
+========================= */
+
+Promise.all([
+  fetch("data/pdsLevels.json").then(res => res.json()),
+  fetch("data/baseAreas.json").then(res => res.json()),
+  fetch("data/progressionData.json").then(res => res.json())
+])
+.then(([pdsLevels, baseAreas, progression]) => {
+
+  progressionData = progression;
+
+  // Build careersData dynamically
+  careersData = pdsLevels.map(pds => ({
+    ...pds,
+    areas: baseAreas.map(area => ({
+      ...area,
+      elements: area.elements.map((title, i) => ({
+        title,
+        pdsNumber: pds.number,
+        areaName: area.name,
+        letter: area.letter,
+        code: `${pds.number}.${area.letter}.${String(i+1).padStart(2,"0")}`
+      }))
+    }))
+  }));
+
+  levelsContainer.appendChild(generateCards(careersData, "PDS"));
+
+})
+.catch(err => console.error("JSON Load Error:", err));
+
+/* =========================
+   GENERATE CARDS
+========================= */
+
+function generateCards(items, type){
+
+  const container = document.createElement('div');
+  container.classList.add('grid','morph-in');
+
+  items.forEach(item => {
+
+    const card = document.createElement('div');
+    card.classList.add('card');
+
+    card.style.backgroundColor = (type === "PDS" || type === "Area") ? item.color : "#333";
+
+    const img = document.createElement('img');
+    img.src = type === "Element" ? "images/icons/default.jpg" : `images/icons/${item.name}.jpg`;
+    img.alt = type === "Element" ? item.title : item.name;
+    card.appendChild(img);
+
+    const h2 = document.createElement('h2');
+    h2.textContent = type === "Element" ? item.title : item.name;
+    card.appendChild(h2);
+
+    card.addEventListener('click', () => {
+      if(type === "PDS"){
+        currentPDS = item;
+        pushLevel(generateCards(item.areas, "Area"));
+      } else if(type === "Area"){
+        pushLevel(generateCards(item.elements, "Element"));
+      } else if(type === "Element"){
+        openKiosk(item);
+      }
+    });
+
+    // show progression data on hover for area cards
+    if(type === "Area"){
+      card.addEventListener("mouseenter", () => {
+        if(infoResetTimeout){ clearTimeout(infoResetTimeout); infoResetTimeout = null; }
+        const pdsData = progressionData && progressionData[currentPDS.name];
+        if(pdsData && pdsData[item.name]){
+          const data = pdsData[item.name];
+          infoTitle.textContent = data.title;
+          infoText.textContent = data.text;
+          infoPanel.classList.add("active");
+        }
+      });
+
+      card.addEventListener("mouseleave", () => {
+        infoResetTimeout = setTimeout(() => {
+          infoPanel.classList.remove("active");
+          infoTitle.textContent = "";
+          infoText.textContent = "";
+        }, 300);
+      });
+    }
+
+    container.appendChild(card);
+  });
+
+  return container;
+}
+
+/* =========================
+   OPEN PRESENTATION
+========================= */
+
+function openKiosk(item){
+
+  const lessonCode = item.code;
+
+  window.open(
+    `/teacher/dashboard.html?lesson=${lessonCode}`,
+    "_blank"
+  );
+
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function pushLevel(levelDiv){
+  if(levelsContainer.firstChild){
+    const current = levelsContainer.firstChild;
+    current.classList.replace("morph-in","morph-out");
+    setTimeout(() => {
+      levelsContainer.removeChild(current);
+      levelHistory.push(current);
+      levelsContainer.appendChild(levelDiv);
+    }, 500);
+  } else {
+    levelsContainer.appendChild(levelDiv);
+  }
+}
+
+backButton.addEventListener('click', () => {
+  if(levelHistory.length > 0){
+    const current = levelsContainer.firstChild;
+    current.classList.replace("morph-in","morph-out");
+    setTimeout(() => {
+      levelsContainer.removeChild(current);
+      const previous = levelHistory.pop();
+      previous.classList.replace("morph-out","morph-in");
+      levelsContainer.appendChild(previous);
+    }, 500);
+  }
+});
+
+/* =========================
+   DARK MODE
+========================= */
+
+darkModeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+  darkModeToggle.textContent = document.body.classList.contains("dark") ? "Light Mode" : "Dark Mode";
+});
+
+</script>
+</body>
+</html>

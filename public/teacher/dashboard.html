@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>Teacher Dashboard</title>
+
+<link rel="stylesheet" href="css/teacher.css">
+
+</head>
+
+<body>
+
+<div id="dashboard">
+
+<h1>Teacher Dashboard</h1>
+
+<div class="panel">
+
+<h2>Session</h2>
+
+<input type="text" id="sessionCode" placeholder="Session code">
+
+<button id="startSession">Start Session</button>
+<button id="launchBoard">Launch Board</button>
+
+</div>
+
+<div class="panel">
+
+<h2>Slide Control</h2>
+
+<div class="controls">
+
+<button id="prevSlide">◀ Previous</button>
+
+<button id="nextSlide">Next ▶</button>
+
+</div>
+
+<div id="slideCounter">
+Slide: <span id="currentSlide">0</span>
+</div>
+
+</div>
+
+<div class="panel">
+
+<h2>Connected Students</h2>
+
+<div id="studentList"></div>
+
+</div>
+
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/teacher.js"></script>
+
+</body>
+
+</html>
