@@ -78,8 +78,29 @@
     "title": "Activity",
     "text": "Current habits that support wellbeing & Habits or routines that could be improved"
   },
+
   {
     "slide_index": 8,
+    "type": "cloze",
+    "activity_id": "cloze_1",
+    "title": "Complete the Sentence",
+    "sentence": "Maintaining _______ supports longterm _______ and happiness.",
+    "answers": [
+      "balance",
+      "success"
+    ],
+    "options": [
+      "strategies",
+      "balance",
+      "sleep",
+      "success",
+      "stress",
+      "emails"
+    ]
+  },
+  
+  {
+    "slide_index": 9,
     "type": "content",
     "title": "Key Takeaways",
     "bullets": [
