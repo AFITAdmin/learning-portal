@@ -63,6 +63,12 @@ function renderSlide(index) {
   const slide = slides[index];
   let html = "";
 
+  // Slide counter
+  const counter = document.getElementById("slideCounter");
+  if (counter) {
+    counter.textContent = `Slide ${index + 1} of ${slides.length}`;
+  }
+
   // Title
   if (slide.title) html += `<h1>${slide.title}</h1>`;
 
