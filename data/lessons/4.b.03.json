@@ -2,25 +2,28 @@
   {
     "slide_index": 0,
     "type": "content",
-    "title": "money",
-    "reference": "4.b.03",
+    "title": "Planning Your Finances",
+    "reference": "4.B.03",
     "pds_stage": "PDS 4",
-    "text": "mooney",
-    "cdi_links": "money"
+    "text": "Discover how financial planning shapes life and career decisions. Learn about budgeting, salary, taxes, and saving for the future.",
+    "cdi_links": "4.B.03 Recognising the role that money and finances play in decisions about life and career"
   },
   {
     "slide_index": 1,
     "type": "content",
     "title": "Introduction",
     "text": "In this lesson, you will explore",
-    "bullets": "money"
+    "bullets": "How salaries affect life choices\nThe basics of budgeting and managing expenses\nUnderstanding taxes, credit, and long-term savings\nHow financial planning supports independence and future goals"
   },
   {
     "slide_index": 2,
     "type": "content",
     "title": "Success Criteria",
     "bullets": [
-      "money"
+      "I can explain why financial planning is important",
+      "I can describe the role of salary, budgeting, and credit",
+      "I can recognise the impact of taxes and pensions",
+      "I can create a simple plan to manage personal finances"
     ]
   },
   {
@@ -40,14 +43,17 @@
     "slide_index": 4,
     "type": "kahoot",
     "title": "Kahoot Quiz",
-    "kahoot_link": "https://play.kahoot.it/v2/?quizId=068b343d-e74a-418a-8d39-dab2191533b9&hostId=8ab42b04-c138-4626-a4f6-03bb34a95d0b"
+    "kahoot_link": "https://play.kahoot.it/v2?quizId=6d07f013-0607-457c-85c0-101cf55a7d79&activeWorkspace=PERSONAL&hostId=8ab42b04-c138-4626-a4f6-03bb34a95d0b&autoAuth=true"
   },
   {
     "slide_index": 5,
     "type": "discussion",
     "title": "Quick Questions",
     "text": [
-      "why?"
+      "Imagine you have a part-time job and earn £200 a week.",
+      "How would you spend or save this money?",
+      "What might you need to pay for immediately?",
+      "What could you save for the future?"
     ]
   },
   {
@@ -55,7 +61,9 @@
     "type": "content",
     "title": "Money Basics Everyone Should Know",
     "bullets": [
-      "get paid"
+      "Salary and Spending: Your salary determines what you can afford today and in the future.",
+      "Budgeting: Prioritise essentials like food, rent, transport, and bills before extras.",
+      "Credit: Borrowing money is useful but must be repaid."
     ]
   },
   {
@@ -63,14 +71,16 @@
     "type": "content",
     "title": "Money Basics Everyone Should Know",
     "bullets": [
-      "Spend"
+      "Taxes: Most earnings are subject to income tax and National Insurance.",
+      "Pensions & Saving: Saving for retirement ensures you have money later in life.",
+      "Cost of Living: Be aware of expenses like rent, transport, utilities, and food."
     ]
   },
   {
     "slide_index": 8,
     "type": "activity",
     "title": "Activity",
-    "text": "do the thing"
+    "text": "Your Personal Finance Plan\nYou will explore how money affects life choices and practice planning for real-life scenarios."
   },
   {
     "slide_index": 9,
@@ -83,12 +93,12 @@
       "independence"
     ],
     "options": [
-      "budgeting",
-      "credit",
-      "salary",
-      "financial",
       "independence",
-      "planning"
+      "credit",
+      "budgeting",
+      "financial",
+      "planning",
+      "salary"
     ]
   },
   {
@@ -96,7 +106,8 @@
     "type": "content",
     "title": "Key Takeaways",
     "text": [
-      "pizza"
+      "Budgeting and understanding salary, credit, and taxes helps make informed decisions",
+      "Saving early builds security for the future"
     ]
   }
 ]

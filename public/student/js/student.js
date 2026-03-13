@@ -1,3 +1,4 @@
+// student.js
 const socket = io();
 
 let session_id = null;
@@ -14,11 +15,15 @@ let selectedName = "";
 
 // Load names from JSON
 async function loadNames() {
-  const res = await fetch("/data/names.json");
-  const data = await res.json();
-  adjectives = data.adjectives;
-  manufacturers = data.manufacturers;
-  updateAttemptsText();
+  try {
+    const res = await fetch("/data/names.json");
+    const data = await res.json();
+    adjectives = data.adjectives;
+    manufacturers = data.manufacturers;
+    updateAttemptsText();
+  } catch (err) {
+    console.error("Error loading names.json:", err);
+  }
 }
 
 function getRandomElement(arr) {
@@ -26,7 +31,8 @@ function getRandomElement(arr) {
 }
 
 function updateAttemptsText() {
-  document.getElementById("attemptsLeft").textContent = `Attempts left: ${attempts}`;
+  const elem = document.getElementById("attemptsLeft");
+  if (elem) elem.textContent = `Attempts left: ${attempts}`;
 }
 
 // Spin name with two "reels" and rolling animation
@@ -39,14 +45,14 @@ function spinName() {
   const adjDisplay = document.getElementById("adjDisplay");
   const manuDisplay = document.getElementById("manuDisplay");
 
-  const totalCycles = 20; // number of updates
+  if (!adjDisplay || !manuDisplay) return;
+
   let cycle = 0;
+  const totalCycles = 20;
 
   const interval = setInterval(() => {
-    const adj = getRandomElement(adjectives);
-    const manu = getRandomElement(manufacturers);
-    adjDisplay.textContent = adj;
-    manuDisplay.textContent = manu;
+    adjDisplay.textContent = getRandomElement(adjectives);
+    manuDisplay.textContent = getRandomElement(manufacturers);
 
     cycle++;
     if (cycle >= totalCycles) {
@@ -59,11 +65,16 @@ function spinName() {
   }, 50);
 }
 
-// Confirm name selection
+// Confirm name selection and join session
 function confirmName() {
-  if (!selectedName) return;
+  if (!selectedName) return alert("Spin to generate a name first!");
+  if (!session_id) return alert("Enter a session code first!");
+
+  console.log("Joining session:", session_id, selectedName);
   sessionStorage.setItem("studentName", selectedName);
+
   socket.emit("joinSession", { session_id, name: selectedName });
+
   document.getElementById("loginBackdrop").style.display = "none";
 }
 
@@ -76,13 +87,14 @@ document.getElementById("joinBtn").addEventListener("click", async () => {
     alert("Enter session code");
     return;
   }
+
   try {
     const res = await fetch(`/api/session/${session_id}`);
     if (!res.ok) throw new Error("Session not found");
 
     const data = await res.json();
-    slides = data.slides;
-    currentSlide = data.slide_index;
+    slides = data.slides || [];
+    currentSlide = data.slide_index || 0;
 
     document.getElementById("loginPanel").style.display = "none";
     document.getElementById("nameSpinnerContainer").style.display = "flex";
@@ -99,6 +111,9 @@ document.getElementById("joinBtn").addEventListener("click", async () => {
 document.getElementById("spinBtn").addEventListener("click", spinName);
 document.getElementById("okBtn").addEventListener("click", confirmName);
 
+// ----------------------------
+// LOAD NAMES
+// ----------------------------
 loadNames();
 
 // ----------------------------
@@ -114,6 +129,7 @@ socket.on("updateSlide", ({ slide_index }) => {
 // ----------------------------
 function renderSlide(index) {
   const container = document.getElementById("slideContainer");
+  if (!container) return;
   container.innerHTML = "";
 
   if (!slides[index]) return;
@@ -136,19 +152,19 @@ function renderSlide(index) {
     html += "</ul>";
   }
 
+  // Kahoot slide
   if (slide.type === "kahoot") {
+    html += `
+      <div class="kahoot-slide">
+        <img src="/images/kahoot_logo.png" class="kahoot-logo">
+        <p class="kahoot-instructions">
+          Go to <a href="https://kahoot.it" target="_blank"><strong>kahoot.it</strong></a> to join the quiz
+        </p>
+      </div>
+    `;
+  }
 
-  html += `
-<div class="kahoot-slide">
-    <img src="/images/kahoot_logo.png" class="kahoot-logo">
-    <p class="kahoot-instructions">
-        Go to <a href="https://kahoot.it" target="_blank"><strong>kahoot.it</strong></a> to join the quiz
-    </p>
-</div>
-  `;
-}
-
-  // Discussion
+  // Discussion slide
   if (slide.type === "discussion") {
     html += `<div class="discussion-box"><strong>Discuss:</strong>`;
     if (slide.text) html += `<p>${slide.text}</p>`;
@@ -160,42 +176,35 @@ function renderSlide(index) {
     html += `</div>`;
   }
 
-  // Activity intro
+  // Activity slide
   if (slide.type === "activity") {
     html += `<div class="activity-box"><p>${slide.text}</p></div>`;
   }
 
-// Cloze drag-drop activity
-if (slide.type === "cloze") {
-  let sentenceHTML = slide.sentence;
-  slide.answers.forEach((_, i) => {
-    sentenceHTML = sentenceHTML.replace(
-      "______",
-      `<span class="drop-zone" data-index="${i}"></span>`
-    );
-  });
+  // Cloze slide
+  if (slide.type === "cloze") {
+    let sentenceHTML = slide.sentence;
+    slide.answers.forEach((_, i) => {
+      sentenceHTML = sentenceHTML.replace("______", `<span class="drop-zone" data-index="${i}"></span>`);
+    });
+    html += `<p class="clozeSentence">${sentenceHTML}</p>`;
 
-  html += `<p class="clozeSentence">${sentenceHTML}</p>`;
-
-  // Remove duplicates before rendering
-  const uniqueOptions = Array.from(new Set(slide.options.map(o => o.trim())));
-
-  html += `<div id="wordBank" class="word-bank">`;
-  uniqueOptions.forEach(opt => {
-    html += `<div class="draggable-word" draggable="true">${opt}</div>`;
-  });
-  html += `</div>`;
-}
+    const uniqueOptions = Array.from(new Set(slide.options.map(o => o.trim())));
+    html += `<div id="wordBank" class="word-bank">`;
+    uniqueOptions.forEach(opt => {
+      html += `<div class="draggable-word" draggable="true">${opt}</div>`;
+    });
+    html += `</div>`;
+  }
 
   container.innerHTML = html;
 
   // ----------------------------
-  // Handle drag-drop Cloze (MULTI BLANK WITH SNAP-BACK + HOVER FEEDBACK)
+  // Handle drag-drop for cloze
   // ----------------------------
   if (slide.type === "cloze") {
     const words = container.querySelectorAll(".draggable-word");
     const dropZones = container.querySelectorAll(".drop-zone");
-
     let draggedWord = null;
     let originalParent = null;
 
@@ -205,7 +214,6 @@ if (slide.type === "cloze") {
         originalParent = word.parentElement;
         word.classList.add("dragging");
       });
-
       word.addEventListener("dragend", () => {
         word.classList.remove("dragging");
       });
@@ -214,19 +222,15 @@ if (slide.type === "cloze") {
     dropZones.forEach(zone => {
       zone.addEventListener("dragover", e => {
         e.preventDefault();
-        zone.classList.add("drag-over"); // translucent highlight
+        zone.classList.add("drag-over");
       });
 
-      zone.addEventListener("dragleave", () => {
-        zone.classList.remove("drag-over");
-      });
+      zone.addEventListener("dragleave", () => zone.classList.remove("drag-over"));
 
       zone.addEventListener("drop", () => {
         zone.classList.remove("drag-over");
-
         if (!draggedWord) return;
 
-        // Snap back if already filled
         if (zone.classList.contains("filled")) {
           originalParent.appendChild(draggedWord);
           draggedWord = null;
@@ -240,7 +244,6 @@ if (slide.type === "cloze") {
 
         const studentName = sessionStorage.getItem("studentName") || "Unknown";
 
-        // Send response
         fetch("/api/response", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
