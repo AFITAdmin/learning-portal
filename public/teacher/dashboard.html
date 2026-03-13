@@ -13,44 +13,34 @@
 
 <div id="dashboard">
 
-<h1>Teacher Dashboard</h1>
+  <h1>Teacher Dashboard</h1>
 
-<div class="panel">
+  <div class="panel">
+    <h2>Session</h2>
 
-<h2>Session</h2>
+    <input type="text" id="sessionCode" placeholder="Session code">
 
-<input type="text" id="sessionCode" placeholder="Session code">
+    <button id="startSession">Start Session</button>
+    <button id="launchBoard">Launch Board</button>
+  </div>
 
-<button id="startSession">Start Session</button>
-<button id="launchBoard">Launch Board</button>
+  <div class="panel">
+    <h2>Slide Control</h2>
 
-</div>
+    <div class="controls">
+      <button id="prevSlide">◀ Previous</button>
+      <button id="nextSlide">Next ▶</button>
+    </div>
 
-<div class="panel">
+    <div id="slideCounter">
+      Slide: <span id="currentSlide">0</span> of <span id="totalSlides">0</span>
+    </div>
+  </div>
 
-<h2>Slide Control</h2>
-
-<div class="controls">
-
-<button id="prevSlide">◀ Previous</button>
-
-<button id="nextSlide">Next ▶</button>
-
-</div>
-
-<div id="slideCounter">
-Slide: <span id="currentSlide">0</span>
-</div>
-
-</div>
-
-<div class="panel">
-
-<h2>Connected Students</h2>
-
-<div id="studentList"></div>
-
-</div>
+  <div class="panel">
+    <h2>Connected Students</h2>
+    <div id="studentList"></div>
+  </div>
 
 </div>
 
@@ -58,5 +48,4 @@ Slide: <span id="currentSlide">0</span>
 <script src="js/teacher.js"></script>
 
 </body>
-
 </html>

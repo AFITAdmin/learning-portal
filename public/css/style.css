@@ -283,3 +283,17 @@ li {
     transform: translateY(0);
   }
 }
+.kahoot-slide {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.kahoot-logo {
+  width: 180px;
+  margin-bottom: 20px;
+}
+
+.kahoot-instructions {
+  font-size: 2rem;
+  font-weight: 600;
+}

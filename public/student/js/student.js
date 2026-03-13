@@ -136,6 +136,18 @@ function renderSlide(index) {
     html += "</ul>";
   }
 
+  if (slide.type === "kahoot") {
+
+  html += `
+<div class="kahoot-slide">
+    <img src="/images/kahoot_logo.png" class="kahoot-logo">
+    <p class="kahoot-instructions">
+        Go to <a href="https://kahoot.it" target="_blank"><strong>kahoot.it</strong></a> to join the quiz
+    </p>
+</div>
+  `;
+}
+
   // Discussion
   if (slide.type === "discussion") {
     html += `<div class="discussion-box"><strong>Discuss:</strong>`;
@@ -153,25 +165,27 @@ function renderSlide(index) {
     html += `<div class="activity-box"><p>${slide.text}</p></div>`;
   }
 
-  // Cloze drag-drop activity
-  if (slide.type === "cloze") {
-    // Replace each blank with a unique drop zone
-    let sentenceHTML = slide.sentence;
-    slide.answers.forEach((_, i) => {
-      sentenceHTML = sentenceHTML.replace(
-        "______",
-        `<span class="drop-zone" data-index="${i}"></span>`
-      );
-    });
+// Cloze drag-drop activity
+if (slide.type === "cloze") {
+  let sentenceHTML = slide.sentence;
+  slide.answers.forEach((_, i) => {
+    sentenceHTML = sentenceHTML.replace(
+      "______",
+      `<span class="drop-zone" data-index="${i}"></span>`
+    );
+  });
 
-    html += `<p class="clozeSentence">${sentenceHTML}</p>`;
+  html += `<p class="clozeSentence">${sentenceHTML}</p>`;
 
-    html += `<div id="wordBank" class="word-bank">`;
-    slide.options.forEach(opt => {
-      html += `<div class="draggable-word" draggable="true">${opt}</div>`;
-    });
-    html += `</div>`;
-  }
+  // Remove duplicates before rendering
+  const uniqueOptions = Array.from(new Set(slide.options.map(o => o.trim())));
+
+  html += `<div id="wordBank" class="word-bank">`;
+  uniqueOptions.forEach(opt => {
+    html += `<div class="draggable-word" draggable="true">${opt}</div>`;
+  });
+  html += `</div>`;
+}
 
   container.innerHTML = html;
 
