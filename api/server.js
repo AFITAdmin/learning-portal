@@ -28,17 +28,6 @@ const pool = new Pool({
 
 const sessions = {};
 
-/*
-Example structure:
-
-sessions = {
-  "483291": {
-      lesson: "4.B.02",
-      slide_index: 0
-  }
-}
-*/
-
 // -----------------------------
 // HELPERS
 // -----------------------------
@@ -53,7 +42,6 @@ function generateSessionCode() {
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../public")));
-
 
 // -----------------------------
 // CREATE SESSION (Teacher)
@@ -70,8 +58,9 @@ app.post("/api/session", (req, res) => {
   const code = generateSessionCode();
 
   sessions[code] = {
-    lesson: lesson,
-    slide_index: 0
+    lesson,
+    slide_index: 0,
+    students: {}
   };
 
   console.log("Session created:", code, lesson);
@@ -80,15 +69,13 @@ app.post("/api/session", (req, res) => {
 
 });
 
-
 // -----------------------------
-// STUDENT JOINS SESSION
+// STUDENT LOADS SESSION
 // -----------------------------
 
 app.get("/api/session/:code", (req, res) => {
 
   const code = req.params.code;
-
   const session = sessions[code];
 
   if (!session) {
@@ -117,7 +104,6 @@ app.get("/api/session/:code", (req, res) => {
 
 });
 
-
 // -----------------------------
 // STORE STUDENT RESPONSES
 // -----------------------------
@@ -145,7 +131,6 @@ app.post("/api/response", async (req, res) => {
 
 });
 
-
 // -----------------------------
 // SOCKET.IO
 // -----------------------------
@@ -154,21 +139,50 @@ io.on("connection", (socket) => {
 
   console.log("New client connected:", socket.id);
 
-  // Student joins session room
-  socket.on("joinSession", (session_id) => {
+  socket.on("joinSession", (payload) => {
+
+    console.log("joinSession payload:", payload);
+
+    // TEACHER JOIN
+    if (typeof payload === "string") {
+
+      const session_id = payload;
+
+      socket.join(session_id);
+
+      console.log(`Teacher joined session ${session_id}`);
+
+      return;
+
+    }
+
+    // STUDENT JOIN
+    const { session_id, name } = payload;
+
+    if (!sessions[session_id]) {
+      console.log("Invalid session:", session_id);
+      return;
+    }
 
     socket.join(session_id);
 
-    console.log(`Socket ${socket.id} joined session ${session_id}`);
+    sessions[session_id].students[socket.id] = {
+      name
+    };
+
+    console.log(`Student ${name} joined session ${session_id}`);
 
     io.to(session_id).emit("studentJoined", {
-      socket_id: socket.id
+      socket_id: socket.id,
+      name
     });
 
   });
 
+  // -----------------------------
+  // SLIDE CHANGE
+  // -----------------------------
 
-  // Teacher changes slide
   socket.on("slideChange", ({ session_id, slide_index }) => {
 
     if (sessions[session_id]) {
@@ -181,13 +195,37 @@ io.on("connection", (socket) => {
 
   });
 
+  // -----------------------------
+  // DISCONNECT
+  // -----------------------------
 
   socket.on("disconnect", () => {
+
     console.log("Client disconnected:", socket.id);
+
+    for (const session_id in sessions) {
+
+      const session = sessions[session_id];
+
+      if (session.students[socket.id]) {
+
+        const name = session.students[socket.id].name;
+
+        delete session.students[socket.id];
+
+        console.log(`Student ${name} left session ${session_id}`);
+
+        io.to(session_id).emit("studentLeft", {
+          socket_id: socket.id
+        });
+
+      }
+
+    }
+
   });
 
 });
-
 
 // -----------------------------
 // START SERVER

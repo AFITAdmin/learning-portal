@@ -1,19 +1,48 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Learning Portal</title>
-<link rel="stylesheet" href="../css/style.css">
+  <meta charset="UTF-8">
+  <title>Learning Portal</title>
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-<div id="app">
-<div id="loginPanel">
-<input id="accessCode" placeholder="Enter session code">
-<button id="joinBtn">Join Lesson</button>
-</div>
-<div id="slideContainer"></div>
-</div>
-<script src="/socket.io/socket.io.js"></script>
-<script src="js/student.js"></script>
+  <div id="app">
+    <div id="loginBackdrop">
+        <div id="loginCard" class="card">
+          
+          <!-- SESSION CODE INPUT -->
+          <div id="loginPanel">
+            <input id="accessCode" placeholder="Enter session code">
+            <button id="joinBtn">Join Lesson</button>
+          </div>
+
+          <!-- NAME SPINNER -->
+          <div id="nameSpinnerContainer" style="display:none;">
+            <p id="yourNameLabel">Your name will be:</p>
+            
+            <!-- Two-reel spinner display -->
+            <div id="spinnerDisplay">
+              <span id="adjDisplay">---</span> <span id="manuDisplay">---</span>
+            </div>
+            
+            <!-- Buttons on same row -->
+            <div class="spinner-buttons">
+              <button id="spinBtn">Spin</button>
+              <button id="okBtn" disabled>OK</button>
+            </div>
+
+            <!-- Attempts remaining -->
+            <p id="attemptsLeft"></p>
+          </div>
+
+        </div>
+    </div>
+
+    <!-- SLIDES WILL BE RENDERED HERE -->
+    <div id="slideContainer"></div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/student.js"></script>
 </body>
 </html>

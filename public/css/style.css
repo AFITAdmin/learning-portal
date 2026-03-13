@@ -1,144 +1,285 @@
-/* Global layout */
+/* -------------------------------
+   Global Layout
+---------------------------------*/
 
-body{
-font-family: "Segoe UI", Arial, sans-serif;
-background:#2f2f2f;
-margin:0;
-padding:0;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #2f2f2f;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-/* Main slide frame */
+/* -------------------------------
+   Card for Login & Name Spinner
+---------------------------------*/
 
-#slideContainer{
-width:1000px;
-max-width:90vw;
-background:rgb(213, 243, 226);
-padding:60px;
-border-radius:12px;
-box-shadow:0 15px 40px rgba(0,0,0,0.15);
-min-height:500px;
-transition:all 0.3s ease;
+#loginCard {
+  position: fixed;       /* overlay on top of slides */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  max-width: 90vw;
+  background: #fff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1000;         /* ensures it stays above slides */
+  transition: all 0.3s ease;
 }
 
-/* Titles */
-
-#slideContainer h2{
-font-size:38px;
-margin-bottom:25px;
-color:#222;
+#loginCard input {
+  width: 70%;
+  padding: 12px;
+  font-size: 18px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 20px;
 }
 
-/* Text */
-
-#slideContainer p{
-font-size:22px;
-line-height:1.6;
-color:#333;
+#loginCard button {
+  padding: 12px 20px;
+  font-size: 18px;
+  background: #4a6cf7;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-/* Bullet lists */
-
-ul{
-margin-top:25px;
-padding-left:30px;
+#loginCard button:hover {
+  background: #3a50c4;
+  transform: translateY(-2px);
 }
 
-li{
-font-size:21px;
-margin-bottom:12px;
+#loginBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* dim slides behind */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;   /* behind card */
 }
 
-/* Discussion slides */
+/* -------------------------------
+   Name Spinner Display
+---------------------------------*/
 
-.discussion-box{
-margin-top:30px;
-padding:25px;
-background:#f5f8ff;
-border-left:6px solid #4a6cf7;
-border-radius:6px;
-font-size:21px;
+#nameSpinnerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
-/* Activity instruction */
-
-.activity-box{
-margin-top:30px;
-padding:25px;
-background:#93c5f1;
-border-left:6px solid #f3214f;
-border-radius:6px;
-font-size:21px;
+#yourNameLabel {
+  font-size: 18px;
+  margin-bottom: 5px;
 }
 
-/* Cloze options */
-
-.option{
-display:inline-block;
-padding:12px 18px;
-margin:8px;
-background:#e4e9f2;
-border:none;
-border-radius:8px;
-cursor:pointer;
-font-size:18px;
-transition:all 0.2s ease;
+#spinnerDisplay {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  font-size: 28px;
+  font-weight: bold;
+  min-height: 50px;
+  margin: 15px 0;
+  color: #222;
 }
 
-.option:hover{
-background:#d6dde8;
-transform:translateY(-2px);
+.spinner-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 10px;
 }
 
-/* Correct / incorrect states */
-
-.correct{
-background:#4CAF50 !important;
-color:white;
+#nameSpinnerContainer button {
+  padding: 8px 20px;
+  font-size: 16px;
+  background: #4a6cf7;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.incorrect{
-background:#e53935 !important;
-color:white;
+#nameSpinnerContainer button:hover {
+  background: #3a50c4;
+  transform: translateY(-2px);
 }
 
-/* Login panel */
-
-#loginPanel{
-position:absolute;
-top:30px;
-left:30px;
-background:white;
-padding:20px;
-border-radius:8px;
-box-shadow:0 6px 20px rgba(0,0,0,0.1);
+#attemptsLeft {
+  font-size: 16px;
+  margin-top: 10px;
+  color: #555;
 }
 
-#loginPanel input{
-padding:8px;
-font-size:16px;
-margin-right:8px;
+/* -------------------------------
+   Main Slide Frame
+---------------------------------*/
+
+#slideContainer {
+  width: 1000px;
+  max-width: 90vw;
+  background: rgb(213, 243, 226);
+  padding: 60px;
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  min-height: 500px;
+  transition: all 0.3s ease;
+  animation: slideFade 0.3s ease;
 }
 
-#loginPanel button{
-padding:8px 14px;
-font-size:16px;
-cursor:pointer;
-}
-#slideContainer{
-animation:slideFade 0.3s ease;
+/* Slide Titles */
+#slideContainer h2 {
+  font-size: 38px;
+  margin-bottom: 25px;
+  color: #222;
 }
 
-@keyframes slideFade{
-from{
-opacity:0;
-transform:translateY(10px);
+/* Slide Text */
+#slideContainer p {
+  font-size: 22px;
+  line-height: 1.6;
+  color: #333;
 }
-to{
-opacity:1;
-transform:translateY(0);
+
+/* Bullet Lists */
+ul {
+  margin-top: 25px;
+  padding-left: 30px;
 }
+
+li {
+  font-size: 21px;
+  margin-bottom: 12px;
+}
+
+/* Discussion Slides */
+.discussion-box {
+  margin-top: 30px;
+  padding: 25px;
+  background: #f5f8ff;
+  border-left: 6px solid #4a6cf7;
+  border-radius: 6px;
+  font-size: 21px;
+}
+
+/* Activity Instructions */
+.activity-box {
+  margin-top: 30px;
+  padding: 25px;
+  background: #93c5f1;
+  border-left: 6px solid #f3214f;
+  border-radius: 6px;
+  font-size: 21px;
+}
+
+/* Cloze Option Buttons */
+.option {
+  display: inline-block;
+  padding: 12px 18px;
+  margin: 8px;
+  background: #e4e9f2;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: all 0.2s ease;
+}
+
+.option:hover {
+  background: #d6dde8;
+  transform: translateY(-2px);
+}
+
+/* Correct / Incorrect states */
+.correct {
+  background: #4caf50 !important;
+  color: white;
+  border-radius: 8px;
+}
+
+.incorrect {
+  background: #e53935 !important;
+  color: white;
+}
+
+.word-bank {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.draggable-word {
+  background: #2c3e50;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: grab;
+  user-select: none;
+}
+
+.draggable-word.dragging {
+  opacity: 0.5;
+}
+
+.drop-zone {
+  display: inline-block;
+  min-width: 80px;
+  border-bottom: 2px solid #000;
+  margin: 0 4px;
+  padding: 6px 2px;
+  text-align: center;
+  border-radius: 8px;
+  transition: background 0.2s;
+  vertical-align: middle;
+}
+
+/* Highlight when a draggable is over this drop zone */
+.drop-zone.drag-over {
+  background: rgba(255, 255, 255, 0.5); /* translucent white */
+  border: 2px dashed #000; /* optional border emphasis */
+}
+
+.drop-zone.correct {
+  color: #1b8f3a;
+  font-weight: bold;
+  border-bottom: 3px solid #1b8f3a;
+}
+
+.draggable-word.incorrect {
+  background: #c0392b;
+}
+
+/* -------------------------------
+   Animations
+---------------------------------*/
+
+@keyframes slideFade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

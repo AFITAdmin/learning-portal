@@ -71,11 +71,8 @@
     "type": "cloze",
     "activity_id": "cloze_1",
     "title": "Complete the Sentence",
-    "sentence": "People use different [strategies] to manage responsibilities and avoid [burnout].",
-    "answers": [
-      "strategies",
-      "burnout"
-    ],
+    "sentence": "People use different ______ to manage responsibilities and avoid ______.",
+    "answers": ["strategies", "burnout"],
     "options": [
       "strategies",
       "burnout",

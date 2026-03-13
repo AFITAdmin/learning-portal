@@ -3,6 +3,8 @@ const socket = io();
 let session_id = null;
 let currentSlide = 0;
 
+const students = {};
+
 // ----------------------------
 // START SESSION
 // ----------------------------
@@ -25,13 +27,10 @@ document.getElementById("startSession").addEventListener("click", async () => {
 
   const data = await res.json();
 
-  // Save session code
   session_id = data.session_code;
 
-  // Display session code for students
   document.getElementById("sessionCode").value = session_id;
 
-  // Teacher joins socket room
   socket.emit("joinSession", session_id);
 
   console.log("Session started:", session_id);
@@ -41,19 +40,20 @@ document.getElementById("startSession").addEventListener("click", async () => {
 // ----------------------------
 // LAUNCH BOARD
 // ----------------------------
+
 document.getElementById("launchBoard").addEventListener("click", () => {
+
   const sessionCode = document.getElementById("sessionCode").value.trim();
 
   if (!sessionCode) return alert("Start a session first!");
 
-  // Open board in a new window
   window.open(
     `/teacher/board.html?session=${sessionCode}`,
     "_blank",
     `width=${screen.width},height=${screen.height},left=0,top=0,fullscreen=yes`
   );
-});
 
+});
 
 // ----------------------------
 // NEXT SLIDE
@@ -74,7 +74,6 @@ document.getElementById("nextSlide").addEventListener("click", () => {
   });
 
 });
-
 
 // ----------------------------
 // PREVIOUS SLIDE
@@ -98,12 +97,11 @@ document.getElementById("prevSlide").addEventListener("click", () => {
 
 });
 
-
 // ----------------------------
-// STUDENT LIST
+// STUDENT JOINED
 // ----------------------------
 
-socket.on("studentJoined", ({ socket_id }) => {
+socket.on("studentJoined", ({ socket_id, name }) => {
 
   const list = document.getElementById("studentList");
 
@@ -111,8 +109,26 @@ socket.on("studentJoined", ({ socket_id }) => {
 
   student.className = "student";
 
-  student.innerText = `Student: ${socket_id}`;
+  student.innerText = name;
 
   list.appendChild(student);
+
+  students[socket_id] = student;
+
+});
+
+// ----------------------------
+// STUDENT LEFT
+// ----------------------------
+
+socket.on("studentLeft", ({ socket_id }) => {
+
+  if (students[socket_id]) {
+
+    students[socket_id].remove();
+
+    delete students[socket_id];
+
+  }
 
 });
