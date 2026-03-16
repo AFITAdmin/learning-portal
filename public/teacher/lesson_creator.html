@@ -188,7 +188,10 @@ document.getElementById('generateBtn').addEventListener('click', () => {
      pds_stage:document.getElementById('pds').value,text:document.getElementById('overview').value,
      cdi_links:document.getElementById('cdiLinks').value},
     {slide_index:1,type:"content",title:"Introduction",text:"In this lesson, you will explore",
-     bullets:document.getElementById('introduction').value},
+  bullets:document.getElementById('introduction').value
+    .split("\n")
+    .map(l => l.trim())
+    .filter(l => l)},
     {slide_index:2,type:"content",title:"Success Criteria",
      bullets:document.getElementById('successCriteria').value.split("\n").map(l=>l.trim()).filter(l=>l)},
     {slide_index:3,type:"content",title:"Key Words",
