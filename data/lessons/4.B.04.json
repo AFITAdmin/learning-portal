@@ -1,0 +1,117 @@
+[
+  {
+    "slide_index": 0,
+    "type": "content",
+    "title": "Reflecting on and Recording Achievements",
+    "reference": "4.G.04",
+    "pds_stage": "PDS 4",
+    "text": "Recognise everything you have achieved so far in life and understand how reflecting on achievements can support future education and career decisions.",
+    "cdi_links": "4.G.04 Reflecting on and recording achievements, experiences and learning"
+  },
+  {
+    "slide_index": 1,
+    "type": "content",
+    "title": "Introduction",
+    "text": "In this lesson, you will explore",
+    "bullets": [
+      "What achievements are and why they matter",
+      "How aspirations shape future goals",
+      "How self-reflection helps personal growth",
+      "How recognising achievements supports career planning"
+    ]
+  },
+  {
+    "slide_index": 2,
+    "type": "content",
+    "title": "Success Criteria",
+    "bullets": [
+      "I can explain what aspirations are",
+      "I can describe the meaning of self-reflection",
+      "I can identify personal achievements",
+      "I can explain how reflecting on achievements supports future goals"
+    ]
+  },
+  {
+    "slide_index": 3,
+    "type": "content",
+    "title": "Key Words",
+    "bullets": [
+      "Aspirations – Hopes or ambitions for the future, especially related to life or career.",
+      "Self-Reflection – Thinking deeply about your actions, feelings, and what you have learned."
+    ]
+  },
+  {
+    "slide_index": 4,
+    "type": "discussion",
+    "title": "Quick Questions",
+    "text": [
+      "Think about something you are proud of achieving.",
+      "What helped you succeed?",
+      "Did you face any challenges along the way?",
+      "How might this achievement help you in the future?"
+    ]
+  },
+  {
+    "slide_index": 5,
+    "type": "content",
+    "title": "Learning – Self Reflection",
+    "bullets": [
+      "Self-reflection means thinking about what you have done and what you learned from it.",
+      "Achievements show your effort, skills, and values.",
+      "Even small successes can tell you something important about yourself.",
+      "Reflecting on experiences helps you plan future goals and career ideas."
+    ]
+  },
+  {
+    "slide_index": 6,
+    "type": "content",
+    "title": "Story – Just Getting There",
+    "text": [
+      "Jay woke up on the morning of an important exam. Things did not go as planned – he was short on time, the weather was bad, and small problems kept appearing.",
+      "Despite this, he kept going and arrived at school just in time.",
+      "By the time the exam began, he realised something important.",
+      "The real achievement had been overcoming the obstacles and making it there."
+    ]
+  },
+  {
+    "slide_index": 7,
+    "type": "activity",
+    "title": "Activity 1",
+    "text": "Your Proudest Achievements\nList the school achievements that have meant the most to you. They do not have to be huge successes. Sometimes small goals can mean a lot."
+  },
+  {
+    "slide_index": 8,
+    "type": "activity",
+    "title": "Activity 2",
+    "text": "Self Reflection\nChoose one achievement and answer the following questions:\nWhat was my achievement?\nWhat challenges did I face?\nWhat or who helped me succeed?\nHow does this support my education or career goals?"
+  },
+  {
+    "slide_index": 9,
+    "type": "cloze",
+    "activity_id": "cloze_1",
+    "title": "Complete the sentence",
+    "sentence": "Self-reflection helps us understand our ______ and plan our ______ goals.",
+    "answers": [
+      "achievements",
+      "future"
+    ],
+    "options": [
+      "future",
+      "salary",
+      "achievements",
+      "budget",
+      "career",
+      "reflection"
+    ]
+  },
+  {
+    "slide_index": 10,
+    "type": "content",
+    "title": "Key Takeaways",
+    "text": [
+      "Achievements show effort, skills, and personal growth",
+      "Self-reflection helps you understand what you have learned",
+      "Thinking about achievements can help guide future education and career plans"
+    ]
+  }
+]

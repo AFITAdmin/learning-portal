@@ -1,0 +1,87 @@
+[
+  {
+    "slide_index": 0,
+    "type": "content",
+    "title": "Workplace Culture",
+    "reference": "4.E.05",
+    "pds_stage": "PDS 4",
+    "text": "Research and describe what it is like to work in various workplaces, considering uniforms, work culture, and status.",
+    "cdi_links": "4.E.05 Researching the range of workplaces and what it is like to work there"
+  },
+  {
+    "slide_index": 1,
+    "type": "content",
+    "title": "Introduction",
+    "bullets": [
+      "Workplaces have their own cultures, expectations, and ways of working",
+      "Uniforms, workplace culture, and hierarchy affect people’s experiences",
+      "Understanding these factors helps you decide what kind of workplace suits you"
+    ]
+  },
+  {
+    "slide_index": 2,
+    "type": "content",
+    "title": "Success Criteria",
+    "bullets": [
+      "I can research and describe what it is like to work in different workplaces",
+      "I can consider uniforms and dress codes",
+      "I can consider workplace culture",
+      "I can consider status, hierarchy, and responsibility"
+    ]
+  },
+  {
+    "slide_index": 3,
+    "type": "content",
+    "title": "Key Words",
+    "bullets": [
+      "Workplace Culture – Shared values, behaviours, and expectations in a workplace, including communication and attitudes",
+      "Hierarchy – Levels of responsibility and authority within a workplace, including managers, supervisors, and team members",
+      "Professional Identity – How someone is recognised in their role through behaviour, dress, responsibilities, and position"
+    ]
+  },
+  {
+    "slide_index": 4,
+    "type": "discussion",
+    "title": "Starter Activity – Thinking About Workplaces",
+    "bullets": [
+      "What makes one workplace different from another?",
+      "Why might some people enjoy a strict workplace while others prefer a relaxed one?",
+      "Can you think of a job where uniform is important? Why?"
+    ]
+  },
+  {
+    "slide_index": 5,
+    "type": "activity",
+    "title": "Research Task",
+    "text": "Exploring Two Sectors"
+
+  },
+
+  {
+    "slide_index": 6,
+    "type": "cloze",
+    "activity_id": "cloze_1",
+    "title": "Complete the Sentence",
+    "sentence": "Understanding workplace ______ helps you identify a suitable working ______.",
+    "answers": ["culture", "environment"],
+    "options": [
+      "culture",
+      "environment",
+      "sleep",
+      "holidays",
+      "stress",
+      "emails"
+    ]
+  },
+  
+  {
+    "slide_index": 7,
+    "type": "content",
+    "title": "Key Takeaways",
+    "bullets": [
+      "Workplaces vary in culture, uniforms, and hierarchy",
+      "Understanding workplace culture helps you identify a suitable working environment",
+      "Researching sectors gives insight into expectations and professional identity"
+    ]
+  }
+]

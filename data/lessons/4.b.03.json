@@ -13,7 +13,12 @@
     "type": "content",
     "title": "Introduction",
     "text": "In this lesson, you will explore",
-    "bullets": "How salaries affect life choices\nThe basics of budgeting and managing expenses\nUnderstanding taxes, credit, and long-term savings\nHow financial planning supports independence and future goals"
+    "bullets": [
+      "How salaries affect life choices",
+      "The basics of budgeting and managing expenses",
+      "Understanding taxes, credit, and long-term savings",
+      "How financial planning supports independence and future goals"
+    ]
   },
   {
     "slide_index": 2,
