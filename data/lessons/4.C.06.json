@@ -66,8 +66,24 @@
     "title": "Activity – Exploring Independent Careers",
     "text": "Choose a self-employed role to research. Record key information on: what the role involves, skills needed, challenges and benefits. Reflect on whether this type of work could suit you and why or why not."
   },
+
+  {"slide_index": 7, 
+  "type": "cloze", 
+  "title": "Independent Careers", 
+  "sentence": "Independent careers require ______, planning, and flexibility.", 
+  "answers": ["responsibility"], 
+  "options": [
+    "responsibility", 
+    "control", 
+    "rules", 
+    "competition", 
+    "inspiration", 
+    "isolation"
+    ]
+  },
+
   {
-    "slide_index": 7,
+    "slide_index": 8,
     "type": "content",
     "title": "Key Takeaways",
     "bullets": [

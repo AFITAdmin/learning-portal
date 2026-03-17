@@ -89,6 +89,24 @@
   },
   {
     "slide_index": 9,
+    "type": "cloze",
+    "activity_id": "cloze_1",
+    "title": "Complete the sentence",
+    "sentence": "A clear action plan with realistic steps increases confidence and career ________.",
+    "answers": [
+      "progress"
+    ],
+    "options": [
+      "confidence",
+      "progress",
+      "network",
+      "knowledge",
+      "experience",
+      "support"
+    ]
+  },
+  {
+    "slide_index": 10,
     "type": "content",
     "title": "Key Takeaways",
     "bullets": [

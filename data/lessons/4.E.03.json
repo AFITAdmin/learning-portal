@@ -104,6 +104,24 @@
   },
   {
     "slide_index": 10,
+    "type": "cloze",
+    "activity_id": "cloze_1",
+    "title": "Complete the sentence",
+    "sentence": "Researching reliable information helps you make better ________ about education and career routes.",
+    "answers": [
+      "choices"
+    ],
+    "options": [
+      "decisions",
+      "choices",
+      "options",
+      "ideas",
+      "plans",
+      "skills"
+    ]
+  },
+  {
+    "slide_index": 11,
     "type": "content",
     "title": "Key Takeaways",
     "bullets": [

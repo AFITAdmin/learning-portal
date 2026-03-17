@@ -79,7 +79,27 @@
     "title": "Activity – Types of Work",
     "text": "Use the pages in the booklet to help you through the activity."
   },
-  
+
+  {"slide_index": 8,
+  "type": "cloze",
+  "title": "Researching Jobs",
+  "text": "Fill in the blanks to complete the sentences about job research.",
+  "sentence": "Job ______ helps you understand what a job is really like, including the ______ involved, the skills needed, and the working environment.",
+  "answers": ["research", "tasks"],
+  "options": ["research", "tasks", "skills", "environment", "informed"]
+  },
+
+  {
+    "slide_index": 9,
+    "type": "content",
+    "title": "Key Takeaways",
+    "bullets": [
+      "Research helps you understand what jobs are really like",
+      "Your interests, values, and skills influence career choices",
+      "Exploring job sectors helps you discover new opportunities"
+    ]
+  },
+
   {
     "slide_index": 8,
     "type": "content",

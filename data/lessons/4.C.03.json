@@ -61,6 +61,7 @@
       "Understanding these changes helps you make informed career decisions"
     ]
   },
+
   {
     "slide_index": 6,
     "type": "content",
@@ -71,6 +72,8 @@
       "Trying alternative pathways and being willing to learn new things increases long-term career control"
     ]
   },
+
+
   {
     "slide_index": 7,
     "type": "content",
@@ -81,6 +84,7 @@
       "Key questions: What do I enjoy now? What am I good at? Have my priorities changed? What new opportunities have I discovered?"
     ]
   },
+
   {
     "slide_index": 8,
     "type": "content",
@@ -98,8 +102,25 @@
     "title": "Activity – Reflect and Adapt Your Career Plan",
     "text": "Reflect on your current career ideas and consider how they might evolve. Practice adapting your plan by exploring alternative pathways and strategies. Include: your current career interest, why it appeals to you, relevant skills or experiences, possible changes to your plan if circumstances or interests change, and strategies to stay on track."
   },
-  {
+
+    {
     "slide_index": 10,
+    "title": "Adapting Career Ideas",
+    "type": "cloze",
+    "sentence": "Successful careers often require people to stay ______ and adjust their ______ when opportunities or interests change.",
+    "answers": ["adaptable", "plans"],
+    "options": [
+      "adaptable", 
+      "plans", 
+      "ignore", 
+      "routine", 
+      "certainty", 
+      "instructions"
+    ]
+  },
+
+  {
+    "slide_index": 11,
     "type": "content",
     "title": "Key Takeaways",
     "bullets": [

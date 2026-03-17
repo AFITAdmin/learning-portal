@@ -69,8 +69,18 @@
     "title": "Activity – Reflecting on Leadership and Role Models",
     "text": "Identify a role model who inspires you or shows leadership."
   },
-  {
+
+   {
     "slide_index": 7,
+     "type": "cloze",
+     "title": "Leadership Skills",
+     "sentence": "Leadership skills include ______, responsibility, problem-solving, and motivating others.",
+     "answers": ["guidance"],
+     "options": ["guidance", "control", "rules", "competition", "inspiration", "isolation"]
+   },
+
+  {
+    "slide_index": 8,
     "type": "content",
     "title": "Key Takeaways",
     "bullets": [

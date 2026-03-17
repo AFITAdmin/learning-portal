@@ -69,10 +69,28 @@
     "slide_index": 7,
     "type": "activity",
     "title": "Activity 2 – Action Plan",
-    "text": "Make a simple action plan for someone wanting to follow this career.\n\nSteps:\n1\n2\n3\n4\n5\n6"
+    "text": "Make a simple action plan for someone wanting to follow this career."
   },
   {
     "slide_index": 8,
+    "type": "cloze",
+    "activity_id": "cloze_1",
+    "title": "Complete the sentence",
+    "sentence": "Researching reliable information helps you make better ________ about education and career routes.",
+    "answers": [
+      "choices"
+    ],
+    "options": [
+      "decisions",
+      "choices",
+      "options",
+      "ideas",
+      "plans",
+      "skills"
+    ]
+  },
+  {
+    "slide_index": 9,
     "type": "content",
     "title": "Key Takeaways",
     "text": [

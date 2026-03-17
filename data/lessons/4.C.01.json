@@ -78,9 +78,28 @@
     "title": "Activity",
     "text": "Mapping Your Influences"
   },
-
   {
     "slide_index": 8,
+    "type": "cloze",
+    "activity_id": "cloze_1",
+    "title": "Complete the sentence",
+    "sentence": "A strong network gives support and opens ________ to career ________.",
+    "answers": [
+      "doors",
+      "opportunities"
+    ],
+    "options": [
+      "support",
+      "doors",
+      "skills",
+      "guidance",
+      "opportunities",
+      "network"
+    ]
+  },
+  
+  {
+    "slide_index": 9,
     "type": "content",
     "title": "Key Takeaways",
     "bullets": [

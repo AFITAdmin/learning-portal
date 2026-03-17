@@ -83,11 +83,28 @@
   {
     "slide_index": 8,
     "type": "activity",
-    "title": "Activity – Using Your Voice",
-    "text": "Explore how people advocate for themselves and others in real workplaces"
+    "title": "Activity",
+    "text": "Using Your Voice"
   },
+
   {
     "slide_index": 9,
+    "title": "Using Your Voice at Work",
+    "type": "cloze",
+    "sentence": "Speaking up in the workplace helps create a more ______ environment and supports ______ treatment for everyone.",
+    "answers": ["respectful", "fair"],
+    "options": [
+      "respectful", 
+      "fair", 
+      "silent", 
+      "competitive", 
+      "private", 
+      "strict"
+    ]
+  },
+
+  {
+    "slide_index": 10,
     "type": "content",
     "title": "Key Takeaways",
     "bullets": [

@@ -69,9 +69,26 @@
     "title": "Activity 1 – Career Research",
     "text": "Choose a career you are curious about"
   },
-  
   {
     "slide_index": 7,
+    "type": "cloze",
+    "activity_id": "cloze_1",
+    "title": "Complete the sentence",
+    "sentence": "Researching reliable information helps you make better ________ about education and career routes.",
+    "answers": [
+      "choices"
+    ],
+    "options": [
+      "decisions",
+      "choices",
+      "options",
+      "ideas",
+      "plans",
+      "skills"
+    ]
+  },
+  {
+    "slide_index": 8,
     "type": "content",
     "title": "Key Takeaways",
     "bullets": [

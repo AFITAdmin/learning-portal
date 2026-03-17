@@ -34,13 +34,8 @@
   {
     "slide_index": 3,
     "type": "activity",
-    "title": "Reflect and Set a Wellbeing Goal",
-    "bullets": [
-      "Colour your wellbeing wheel for Sleep, Exercise, Nutrition, Relaxation, and Socialising",
-      "Identify one area you would like to improve",
-      "Set a small, realistic action to improve this area (e.g., walk 10 minutes, sleep 8 hours, talk to a friend)",
-      "Share your goal with a partner or group and reflect after a week"
-    ]
+    "title": "Activity",
+    "text":"Reflect and Set a Wellbeing Goal"
   },
   {
     "slide_index": 4,
