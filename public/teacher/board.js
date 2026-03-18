@@ -73,7 +73,10 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const res = await fetch(`/api/session/${session_id}`);
       if (!res.ok) {
-        container.innerHTML = "<h2>Session not found</h2>";
+        container.textContent = "";
+        const errorHeading = document.createElement("h2");
+        errorHeading.textContent = "Session not found";
+        container.appendChild(errorHeading);
         return;
       }
 
@@ -87,7 +90,10 @@ document.addEventListener("DOMContentLoaded", () => {
       renderSlide(currentSlide);
 
     } catch (err) {
-      container.innerHTML = `<h2>Error loading session: ${err.message}</h2>`;
+      container.textContent = "";
+      const errorHeading = document.createElement("h2");
+      errorHeading.textContent = `Error loading session: ${err.message}`;
+      container.appendChild(errorHeading);
     }
   }
 
@@ -122,13 +128,15 @@ document.addEventListener("DOMContentLoaded", () => {
   // RENDER SLIDE
   // -----------------------------
   function renderSlide(index) {
+    container.textContent = "";
     if (!slides[index]) {
-      container.innerHTML = "<h2>No slide content</h2>";
+      const noSlide = document.createElement("h2");
+      noSlide.textContent = "No slide content";
+      container.appendChild(noSlide);
       return;
     }
 
     const slide = slides[index];
-    let html = "";
 
     // Slide counter
     const currentSlideElem = document.getElementById("currentSlide");
@@ -139,66 +147,122 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Slide title
-    if (slide.title) html += `<h1>${slide.title}</h1>`;
+    if (slide.title) {
+      const title = document.createElement("h1");
+      title.textContent = slide.title;
+      container.appendChild(title);
+    }
 
     // Normal text
     if (slide.text && slide.type !== "discussion" && slide.type !== "activity") {
-      html += `<p>${slide.text}</p>`;
+      const p = document.createElement("p");
+      p.textContent = slide.text;
+      container.appendChild(p);
     }
 
     // Bullets
     if (slide.bullets && slide.type !== "discussion" && slide.type !== "activity") {
-      html += "<ul>";
-      slide.bullets.forEach(item => html += `<li>${item}</li>`);
-      html += "</ul>";
+      const ul = document.createElement("ul");
+      slide.bullets.forEach((item) => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        ul.appendChild(li);
+      });
+      container.appendChild(ul);
     }
 
     // Kahoot
     if (slide.type === "kahoot") {
-      html += `
-      <div class="activity-box">
-        <h2>Kahoot Quiz</h2>
-        <p>Launch the quiz from this link:</p>
-        <p><a href="${slide.kahoot_link}" target="_blank" class="kahootLink">Open Kahoot Quiz</a></p>
-      </div>`;
+      const activityBox = document.createElement("div");
+      activityBox.className = "activity-box";
+
+      const h2 = document.createElement("h2");
+      h2.textContent = "Kahoot Quiz";
+      activityBox.appendChild(h2);
+
+      const pIntro = document.createElement("p");
+      pIntro.textContent = "Launch the quiz from this link:";
+      activityBox.appendChild(pIntro);
+
+      const pLink = document.createElement("p");
+      const a = document.createElement("a");
+      a.href = slide.kahoot_link || "#";
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.className = "kahootLink";
+      a.textContent = "Open Kahoot Quiz";
+      pLink.appendChild(a);
+      activityBox.appendChild(pLink);
+
+      container.appendChild(activityBox);
     }
 
     // Discussion
     if (slide.type === "discussion") {
-      html += `<div class="discussion-box"><strong>Discuss:</strong>`;
-      if (slide.text) html += `<p>${slide.text}</p>`;
-      if (slide.bullets) {
-        html += "<ul>";
-        slide.bullets.forEach(item => html += `<li>${item}</li>`);
-        html += "</ul>";
+      const discussion = document.createElement("div");
+      discussion.className = "discussion-box";
+
+      const strong = document.createElement("strong");
+      strong.textContent = "Discuss:";
+      discussion.appendChild(strong);
+
+      if (slide.text) {
+        const pText = document.createElement("p");
+        pText.textContent = slide.text;
+        discussion.appendChild(pText);
       }
-      html += `</div>`;
+
+      if (slide.bullets) {
+        const ul = document.createElement("ul");
+        slide.bullets.forEach((item) => {
+          const li = document.createElement("li");
+          li.textContent = item;
+          ul.appendChild(li);
+        });
+        discussion.appendChild(ul);
+      }
+
+      container.appendChild(discussion);
     }
 
     // Activity
     if (slide.type === "activity") {
-      html += `<div class="activity-box"><p>${slide.text}</p>`;
+      const activity = document.createElement("div");
+      activity.className = "activity-box";
+
+      const pActivity = document.createElement("p");
+      pActivity.textContent = slide.text || "";
+      activity.appendChild(pActivity);
+
       if (slide.bullets) {
-        html += "<ul>";
-        slide.bullets.forEach(item => html += `<li>${item}</li>`);
-        html += "</ul>";
+        const ul = document.createElement("ul");
+        slide.bullets.forEach((item) => {
+          const li = document.createElement("li");
+          li.textContent = item;
+          ul.appendChild(li);
+        });
+        activity.appendChild(ul);
       }
-      html += `</div>`;
+
+      container.appendChild(activity);
     }
 
     // Cloze
     if (slide.type === "cloze") {
-      html += `<p>${slide.sentence}</p>`;
-      slide.options.forEach(opt => html += `<button class="option">${opt}</button>`);
-    }
+      const sentenceP = document.createElement("p");
+      sentenceP.textContent = slide.sentence;
+      container.appendChild(sentenceP);
 
-    container.innerHTML = html;
+      slide.options?.forEach((opt) => {
+        const btn = document.createElement("button");
+        btn.className = "option";
+        btn.textContent = opt;
+        container.appendChild(btn);
+      });
 
-    // Cloze button handling
-    if (slide.type === "cloze") {
-      container.querySelectorAll(".option").forEach(btn => {
+      container.querySelectorAll(".option").forEach((btn) => {
         btn.addEventListener("click", () => {
-          const correct = slide.answers.includes(btn.textContent);
+          const correct = (slide.answers || []).includes(btn.textContent);
           btn.classList.add(correct ? "correct" : "incorrect");
         });
       });

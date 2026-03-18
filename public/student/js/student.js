@@ -44,8 +44,14 @@ function spinName() {
 
   const adjDisplay = document.getElementById("adjDisplay");
   const manuDisplay = document.getElementById("manuDisplay");
+  const spinBtn = document.getElementById("spinBtn");
+  const okBtn = document.getElementById("okBtn");
 
-  if (!adjDisplay || !manuDisplay) return;
+  if (!adjDisplay || !manuDisplay || !spinBtn || !okBtn) return;
+
+  isSpinning = true;
+  spinBtn.disabled = true;
+  okBtn.disabled = true;
 
   let cycle = 0;
   const totalCycles = 20;
@@ -60,33 +66,77 @@ function spinName() {
       selectedName = `${adjDisplay.textContent} ${manuDisplay.textContent}`;
       attempts--;
       updateAttemptsText();
-      document.getElementById("okBtn").disabled = false;
+      okBtn.disabled = false;
+      spinBtn.disabled = false;
+      isSpinning = false;
     }
   }, 50);
 }
 
 // Confirm name selection and join session
 function confirmName() {
-  if (!selectedName) return alert("Spin to generate a name first!");
-  if (!session_id) return alert("Enter a session code first!");
+  if (!selectedName) {
+    alert("Spin to generate a name first!");
+    return;
+  }
+  if (!session_id) {
+    alert("Enter a session code first!");
+    return;
+  }
+
+  const okBtn = document.getElementById("okBtn");
+  if (okBtn) okBtn.disabled = true;
 
   console.log("Joining session:", session_id, selectedName);
   sessionStorage.setItem("studentName", selectedName);
 
+  // Emit without requiring an acknowledgement callback so behavior matches the existing server handler.
   socket.emit("joinSession", { session_id, name: selectedName });
 
-  document.getElementById("loginBackdrop").style.display = "none";
+  const loginBackdrop = document.getElementById("loginBackdrop");
+  if (loginBackdrop) loginBackdrop.style.display = "none";
 }
 
+
+
 // ----------------------------
-// JOIN SESSION (CODE INPUT)
+// DOM CONTENT LOADED INIT
 // ----------------------------
-document.getElementById("joinBtn").addEventListener("click", async () => {
-  session_id = document.getElementById("accessCode").value.trim();
+let isSpinning = false;
+
+function init() {
+  const joinBtn = document.getElementById("joinBtn");
+  const spinBtn = document.getElementById("spinBtn");
+  const okBtn = document.getElementById("okBtn");
+
+  if (joinBtn) {
+    joinBtn.addEventListener("click", joinSession);
+  }
+  if (spinBtn) {
+    spinBtn.addEventListener("click", () => {
+      if (isSpinning) return;
+      spinName();
+    });
+  }
+  if (okBtn) {
+    okBtn.addEventListener("click", confirmName);
+  }
+
+  loadNames();
+}
+
+document.addEventListener("DOMContentLoaded", init);
+
+async function joinSession() {
+  const accessCodeEl = document.getElementById("accessCode");
+  session_id = accessCodeEl ? accessCodeEl.value.trim() : "";
   if (!session_id) {
     alert("Enter session code");
     return;
   }
+
+  const joinBtn = document.getElementById("joinBtn");
+  if (joinBtn) joinBtn.disabled = true;
 
   try {
     const res = await fetch(`/api/session/${session_id}`);
@@ -96,25 +146,17 @@ document.getElementById("joinBtn").addEventListener("click", async () => {
     slides = data.slides || [];
     currentSlide = data.slide_index || 0;
 
-    document.getElementById("loginPanel").style.display = "none";
-    document.getElementById("nameSpinnerContainer").style.display = "flex";
+    const loginPanel = document.getElementById("loginPanel");
+    const nameSpinnerContainer = document.getElementById("nameSpinnerContainer");
+    if (loginPanel) loginPanel.style.display = "none";
+    if (nameSpinnerContainer) nameSpinnerContainer.style.display = "flex";
 
     renderSlide(currentSlide);
   } catch (err) {
     alert(err.message);
+    if (joinBtn) joinBtn.disabled = false;
   }
-});
-
-// ----------------------------
-// SPINNER BUTTONS
-// ----------------------------
-document.getElementById("spinBtn").addEventListener("click", spinName);
-document.getElementById("okBtn").addEventListener("click", confirmName);
-
-// ----------------------------
-// LOAD NAMES
-// ----------------------------
-loadNames();
+}
 
 // ----------------------------
 // RECEIVE SLIDE CHANGES
@@ -135,80 +177,140 @@ function renderSlide(index) {
   if (!slides[index]) return;
 
   const slide = slides[index];
-  let html = "";
 
-  // Title
-  if (slide.title) html += `<h2>${slide.title}</h2>`;
+  if (slide.title) {
+    const title = document.createElement("h2");
+    title.textContent = slide.title;
+    container.appendChild(title);
+  }
 
-  // Normal text
   if (slide.text && slide.type !== "discussion" && slide.type !== "activity") {
-    html += `<p>${slide.text}</p>`;
+    const textEl = document.createElement("p");
+    textEl.textContent = slide.text;
+    container.appendChild(textEl);
   }
 
-  // Bullets
   if (slide.bullets && slide.type !== "discussion" && slide.type !== "activity") {
-    html += "<ul>";
-    slide.bullets.forEach(item => (html += `<li>${item}</li>`));
-    html += "</ul>";
+    const ul = document.createElement("ul");
+    slide.bullets.forEach((item) => {
+      const li = document.createElement("li");
+      li.textContent = item;
+      ul.appendChild(li);
+    });
+    container.appendChild(ul);
   }
 
-  // Kahoot slide
   if (slide.type === "kahoot") {
-    html += `
-      <div class="kahoot-slide">
-        <img src="/images/kahoot_logo.png" class="kahoot-logo">
-        <p class="kahoot-instructions">
-          Go to <a href="https://kahoot.it" target="_blank"><strong>kahoot.it</strong></a> to join the quiz
-        </p>
-      </div>
-    `;
+    const kahoot = document.createElement("div");
+    kahoot.className = "kahoot-slide";
+
+    const img = document.createElement("img");
+    img.src = "/images/kahoot_logo.png";
+    img.className = "kahoot-logo";
+    kahoot.appendChild(img);
+
+    const p = document.createElement("p");
+    p.className = "kahoot-instructions";
+
+    p.appendChild(document.createTextNode("Go to "));
+    const a = document.createElement("a");
+    a.href = "https://kahoot.it";
+    a.target = "_blank";
+    a.rel = "noopener";
+
+    const strong = document.createElement("strong");
+    strong.textContent = "kahoot.it";
+
+    a.appendChild(strong);
+    p.appendChild(a);
+    p.appendChild(document.createTextNode(" to join the quiz"));
+
+    kahoot.appendChild(p);
+
+    container.appendChild(kahoot);
   }
 
-  // Discussion slide
   if (slide.type === "discussion") {
-    html += `<div class="discussion-box"><strong>Discuss:</strong>`;
-    if (slide.text) html += `<p>${slide.text}</p>`;
-    if (slide.bullets) {
-      html += "<ul>";
-      slide.bullets.forEach(item => (html += `<li>${item}</li>`));
-      html += "</ul>";
+    const discussion = document.createElement("div");
+    discussion.className = "discussion-box";
+    const strong = document.createElement("strong");
+    strong.textContent = "Discuss:";
+    discussion.appendChild(strong);
+
+    if (slide.text) {
+      const textEl = document.createElement("p");
+      textEl.textContent = slide.text;
+      discussion.appendChild(textEl);
     }
-    html += `</div>`;
+
+    if (slide.bullets) {
+      const ul = document.createElement("ul");
+      slide.bullets.forEach((item) => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        ul.appendChild(li);
+      });
+      discussion.appendChild(ul);
+    }
+
+    container.appendChild(discussion);
   }
 
-  // Activity slide
   if (slide.type === "activity") {
-    html += `<div class="activity-box"><p>${slide.text}</p></div>`;
+    const activity = document.createElement("div");
+    activity.className = "activity-box";
+    const textEl = document.createElement("p");
+    textEl.textContent = slide.text || "";
+    activity.appendChild(textEl);
+    container.appendChild(activity);
   }
 
-  // Cloze slide
   if (slide.type === "cloze") {
-    let sentenceHTML = slide.sentence;
-    slide.answers.forEach((_, i) => {
-      sentenceHTML = sentenceHTML.replace("______", `<span class="drop-zone" data-index="${i}"></span>`);
+    const sentenceParagraph = document.createElement("p");
+    sentenceParagraph.className = "clozeSentence";
+
+    if (!slide.sentence || !slide.sentence.includes("______")) {
+      const textEl = document.createElement("p");
+      textEl.textContent = "Cloze slide is malformed.";
+      container.appendChild(textEl);
+      return;
+    }
+
+    const parts = slide.sentence.split("______");
+    parts.forEach((part, index) => {
+      sentenceParagraph.appendChild(document.createTextNode(part));
+      if (index < parts.length - 1) {
+        const dropZone = document.createElement("span");
+        dropZone.className = "drop-zone";
+        dropZone.dataset.index = index;
+        sentenceParagraph.appendChild(dropZone);
+      }
     });
-    html += `<p class="clozeSentence">${sentenceHTML}</p>`;
 
-    const uniqueOptions = Array.from(new Set(slide.options.map(o => o.trim())));
-    html += `<div id="wordBank" class="word-bank">`;
-    uniqueOptions.forEach(opt => {
-      html += `<div class="draggable-word" draggable="true">${opt}</div>`;
+    container.appendChild(sentenceParagraph);
+
+    const uniqueOptions = Array.from(new Set((slide.options || []).map((o) => o.trim())));
+    const wordBank = document.createElement("div");
+    wordBank.id = "wordBank";
+    wordBank.className = "word-bank";
+
+    uniqueOptions.forEach((opt) => {
+      const word = document.createElement("div");
+      word.className = "draggable-word";
+      word.draggable = true;
+      word.textContent = opt;
+      wordBank.appendChild(word);
     });
-    html += `</div>`;
-  }
 
-  container.innerHTML = html;
+    container.appendChild(wordBank);
 
-  // ----------------------------
-  // Handle drag-drop for cloze
-  // ----------------------------
-  if (slide.type === "cloze") {
-    const words = container.querySelectorAll(".draggable-word");
-    const dropZones = container.querySelectorAll(".drop-zone");
     let draggedWord = null;
     let originalParent = null;
 
-    words.forEach(word => {
+    const words = wordBank.querySelectorAll(".draggable-word");
+    const dropZones = container.querySelectorAll(".drop-zone");
+
+    words.forEach((word) => {
       word.addEventListener("dragstart", () => {
         draggedWord = word;
         originalParent = word.parentElement;
@@ -219,8 +321,8 @@ function renderSlide(index) {
       });
     });
 
-    dropZones.forEach(zone => {
-      zone.addEventListener("dragover", e => {
+    dropZones.forEach((zone) => {
+      zone.addEventListener("dragover", (e) => {
         e.preventDefault();
         zone.classList.add("drag-over");
       });
@@ -232,14 +334,15 @@ function renderSlide(index) {
         if (!draggedWord) return;
 
         if (zone.classList.contains("filled")) {
-          originalParent.appendChild(draggedWord);
+          // prevent replacement in already completed slot
+          if (originalParent) originalParent.appendChild(draggedWord);
           draggedWord = null;
           return;
         }
 
-        const index = parseInt(zone.dataset.index);
+        const index = parseInt(zone.dataset.index, 10);
         const answer = draggedWord.textContent.trim();
-        const correctAnswer = slide.answers[index];
+        const correctAnswer = (slide.answers || [])[index] || "";
         const correct = answer === correctAnswer;
 
         const studentName = sessionStorage.getItem("studentName") || "Unknown";
@@ -253,9 +356,9 @@ function renderSlide(index) {
             activity_id: slide.activity_id,
             question_id: index,
             answer,
-            correct
-          })
-        });
+            correct,
+          }),
+        }).catch((e) => console.error("Response submit failed", e));
 
         if (correct) {
           zone.textContent = answer;

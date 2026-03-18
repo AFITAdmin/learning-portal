@@ -6,8 +6,18 @@ const { Server } = require("socket.io");
 const { Pool } = require("pg");
 const path = require("path");
 const fs = require("fs");
+const {
+  validateSessionPayload,
+  validateResponsePayload,
+  validateSessionCode
+} = require("./validation");
 
 require("dotenv").config();
+
+if (!process.env.DATABASE_URL) {
+  console.error("DATABASE_URL is missing. Check your .env file.");
+  process.exit(1);
+}
 
 const app = express();
 const server = http.createServer(app);
@@ -48,13 +58,12 @@ app.use(express.static(path.join(__dirname, "../public")));
 // -----------------------------
 
 app.post("/api/session", (req, res) => {
-
-  const { lesson } = req.body;
-
-  if (!lesson) {
-    return res.status(400).json({ error: "Lesson required" });
+  const { error, value } = validateSessionPayload(req.body);
+  if (error) {
+    return res.status(400).json({ error: "Invalid session payload", details: error.details.map(d => d.message) });
   }
 
+  const lesson = value.lesson;
   const code = generateSessionCode();
 
   sessions[code] = {
@@ -66,7 +75,6 @@ app.post("/api/session", (req, res) => {
   console.log("Session created:", code, lesson);
 
   res.json({ session_code: code });
-
 });
 
 // -----------------------------
@@ -74,10 +82,13 @@ app.post("/api/session", (req, res) => {
 // -----------------------------
 
 app.get("/api/session/:code", (req, res) => {
-
   const code = req.params.code;
-  const session = sessions[code];
+  const { error } = validateSessionCode(code);
+  if (error) {
+    return res.status(400).json({ error: "Invalid session code" });
+  }
 
+  const session = sessions[code];
   if (!session) {
     return res.status(404).json({ error: "Session not found" });
   }
@@ -109,11 +120,14 @@ app.get("/api/session/:code", (req, res) => {
 // -----------------------------
 
 app.post("/api/response", async (req, res) => {
+  const { error, value } = validateResponsePayload(req.body);
+  if (error) {
+    return res.status(400).json({ error: "Invalid response payload", details: error.details.map(d => d.message) });
+  }
 
-  const { student_id, session_id, activity_id, question_id, answer, correct } = req.body;
+  const { student_id, session_id, activity_id, question_id, answer, correct } = value;
 
   try {
-
     await pool.query(
       `INSERT INTO responses(student_id, session_id, activity_id, question_id, answer, correct, timestamp)
        VALUES($1,$2,$3,$4,$5,$6,NOW())`,
@@ -121,14 +135,10 @@ app.post("/api/response", async (req, res) => {
     );
 
     res.send({ status: "ok" });
-
   } catch (err) {
-
-    console.error(err);
+    console.error("Response DB insert error", err);
     res.status(500).send({ status: "error" });
-
   }
-
 });
 
 // -----------------------------
