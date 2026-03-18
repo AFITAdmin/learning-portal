@@ -28,7 +28,7 @@ const io = new Server(server);
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false },
-  family: 4
+//  family: 4
 });
 
 console.log("DATABASE_URL (masked):", process.env.DATABASE_URL ? process.env.DATABASE_URL.replace(/(postgresql:\/\/[^:]+:)([^@]+)(@.+)/, "$1***$3") : "<not set>");
