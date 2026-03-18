@@ -1,0 +1,12 @@
+server.js
+✅ What needs to be done to call it "safe"
+Use proper auth (token/session for teacher + student).
+Replace in-memory sessions with DB or Redis.
+Add input schema validation ( e.g., express-validator, Joi ).
+Enable HTTPS and proper PG TLS (rejectUnauthorized: true).
+Add rate limiting (express-rate-limit).
+Add error handling / 500 fallback route.
+Add sanitization and strict JSON schema for lesson / response fields.
+Harden socket event params.
+Add security HTTP headers with helmet.
+Add tests for security / endpoints.
