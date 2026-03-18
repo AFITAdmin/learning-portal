@@ -24,7 +24,6 @@ const server = http.createServer(app);
 const io = new Server(server);
 
 // PostgreSQL pool
-console.log("DATABASE_URL:", process.env.DATABASE_URL);
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -34,9 +33,10 @@ const pool = new Pool({
 
 console.log("DATABASE_URL (masked):", process.env.DATABASE_URL ? process.env.DATABASE_URL.replace(/(postgresql:\/\/[^:]+:)([^@]+)(@.+)/, "$1***$3") : "<not set>");
 try {
-  console.log("DATABASE_HOST:", process.env.DATABASE_URL ? new URL(process.env.DATABASE_URL).hostname : "<not set>");
+  const match = process.env.DATABASE_URL.match(/@([^:/]+)(:\d+)?\//);
+  console.log("DATABASE_HOST:", match ? match[1] : "<not set>");
 } catch (err) {
-  console.error("DATABASE_URL is invalid:", err.message);
+  console.error("DATABASE_URL parsing failed:", err.message);
 }
 
 // -----------------------------
