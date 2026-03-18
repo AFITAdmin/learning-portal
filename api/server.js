@@ -25,18 +25,14 @@ const io = new Server(server);
 
 // PostgreSQL pool
 
+const { Pool } = require('pg');
+
 console.log("RAW DATABASE_URL:", process.env.DATABASE_URL);
 
-const { Client } = require('pg');
-
-const client = new Client({
+const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false }
 });
-
-client.connect()
-  .then(() => console.log("CONNECTED SUCCESSFULLY"))
-  .catch(err => console.error("DIRECT CONNECTION ERROR:", err));
 
 console.log("DATABASE_URL (masked):", process.env.DATABASE_URL ? process.env.DATABASE_URL.replace(/(postgresql:\/\/[^:]+:)([^@]+)(@.+)/, "$1***$3") : "<not set>");
 try {
@@ -45,6 +41,10 @@ try {
 } catch (err) {
   console.error("DATABASE_URL parsing failed:", err.message);
 }
+
+pool.query('SELECT NOW()')
+  .then(() => console.log('DB OK'))
+  .catch(err => console.error('DB ERROR:', err));
 
 // -----------------------------
 // SESSION STORE (in memory)
