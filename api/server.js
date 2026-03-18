@@ -32,6 +32,13 @@ const pool = new Pool({
   family: 4
 });
 
+console.log("DATABASE_URL (masked):", process.env.DATABASE_URL ? process.env.DATABASE_URL.replace(/(postgresql:\/\/[^:]+:)([^@]+)(@.+)/, "$1***$3") : "<not set>");
+try {
+  console.log("DATABASE_HOST:", process.env.DATABASE_URL ? new URL(process.env.DATABASE_URL).hostname : "<not set>");
+} catch (err) {
+  console.error("DATABASE_URL is invalid:", err.message);
+}
+
 // -----------------------------
 // SESSION STORE (in memory)
 // -----------------------------
