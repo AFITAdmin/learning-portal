@@ -4,6 +4,9 @@ const express = require("express");
 const http = require("http");
 const { Server } = require("socket.io");
 const { Pool } = require("pg");
+const { URL } = require("url");
+const dbUrl = new URL(process.env.DATABASE_URL);
+
 const path = require("path");
 const fs = require("fs");
 const {
@@ -28,7 +31,11 @@ const io = new Server(server);
 console.log("RAW DATABASE_URL:", process.env.DATABASE_URL);
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  host: dbUrl.hostname,
+  port: dbUrl.port,
+  user: dbUrl.username,
+  password: dbUrl.password,
+  database: dbUrl.pathname.slice(1), // remove leading /
   ssl: { rejectUnauthorized: false }
 });
 
