@@ -25,8 +25,6 @@ const io = new Server(server);
 
 // PostgreSQL pool
 
-const { Pool } = require('pg');
-
 console.log("RAW DATABASE_URL:", process.env.DATABASE_URL);
 
 const pool = new Pool({
