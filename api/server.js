@@ -35,9 +35,9 @@ const pool = new Pool({
   port: dbUrl.port,
   user: dbUrl.username,
   password: dbUrl.password,
-  database: dbUrl.pathname.slice(1), // remove leading /
-  ssl: { rejectUnauthorized: false }
-  family: 4 // Force IPv4
+  database: dbUrl.pathname.slice(1),
+  ssl: { rejectUnauthorized: false },
+  family: 4 // force IPv4
 });
 
 console.log("DATABASE_URL (masked):", process.env.DATABASE_URL ? process.env.DATABASE_URL.replace(/(postgresql:\/\/[^:]+:)([^@]+)(@.+)/, "$1***$3") : "<not set>");
