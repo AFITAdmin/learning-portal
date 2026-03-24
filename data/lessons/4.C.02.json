@@ -6,7 +6,8 @@
     "reference": "4.C.02",
     "pds_stage": "PDS 4",
     "text": "Identify a realistic career-related goal and describe clear, practical actions you can take to make progress towards it.",
-    "cdi_links": "4.C.02 Starting to take responsibility for making things happen in their career"
+    "cdi_links": "4.C.02 Starting to take responsibility for making things happen in their career",
+    "image": "/images/2.B.01/slide0_intro.jpg"
   },
   {
     "slide_index": 1,
@@ -17,7 +18,8 @@
       "Understand how small, realistic actions can move you towards your goals",
       "Set a career-related goal and break it into achievable steps",
       "Identify possible barriers and create a simple action plan to support your progress"
-    ]
+    ],
+    "image": "/images/2.B.01/slide1_introduction.jpg"
   },
   {
     "slide_index": 2,
@@ -29,7 +31,8 @@
       "I can break my goal into small, achievable steps",
       "I can take responsibility for my progress by choosing realistic actions",
       "I can begin developing an action plan with next steps and possible deadlines"
-    ]
+    ],
+    "image": "/images/2.B.01/slide2_success_criteria.jpg"
   },
   {
     "slide_index": 3,
@@ -40,7 +43,8 @@
       "Accountability – Accepting responsibility for your choices, actions, and progress",
       "Milestones – Small achievements or checkpoints that show you’re moving in the right direction",
       "Barriers – Things that might get in the way of progress and strategies to overcome them"
-    ]
+    ],
+    "image": "/images/2.B.01/slide3_keywords.jpg"
   },
   {
     "slide_index": 4,
@@ -49,7 +53,8 @@
     "bullets": [
       "Why do you think some people struggle to make progress towards their goals?",
       "Do you prefer working towards big goals or small goals? Why?"
-    ]
+    ],
+    "image": "/images/2.B.01/slide4_kahoot.jpg"
   },
   {
     "slide_index": 5,
@@ -60,7 +65,8 @@
       "Employers value people who show initiative",
       "It helps you feel more confident and in control",
       "Small steps lead to big changes over time"
-    ]
+    ],
+    "image": "/images/2.B.01/slide5_discussion.jpg"
   },
   {
     "slide_index": 6,
@@ -70,7 +76,8 @@
       "Large goals can feel overwhelming, so break them into smaller steps",
       "Example: Goal – Get a part-time job",
       "Steps: Update or create a CV, ask for feedback, look for vacancies, visit shops to enquire, apply for at least two roles each week"
-    ]
+    ],
+    "image": "/images/2.B.01/slide6_learning.jpg"
   },
   {
     "slide_index": 7,
@@ -79,13 +86,15 @@
     "bullets": [
       "An action plan records your goal, the steps needed, resources/support, possible deadlines, and how you will hold yourself accountable",
       "It helps you stay focused and on track without being complicated"
-    ]
+    ],
+    "image": "/images/2.B.01/slide7_learning.jpg"
   },
   {
     "slide_index": 8,
     "type": "activity",
     "title": "Activity – Plan Your Goal",
-    "text": "Set one personal or career-related goal. List three actions you can take to move towards it, then create a simple action plan including: possible completion date, someone who can support you, and how you will stay on track."
+    "text": "Set one personal or career-related goal. List three actions you can take to move towards it, then create a simple action plan including: possible completion date, someone who can support you, and how you will stay on track.",
+    "image": "/images/2.B.01/activity.jpg"
   },
   {
     "slide_index": 9,
@@ -103,7 +112,8 @@
       "knowledge",
       "experience",
       "support"
-    ]
+    ],
+    "image": "/images/2.B.01/cloze.jpg"
   },
   {
     "slide_index": 10,
@@ -112,6 +122,7 @@
     "bullets": [
       "Taking responsibility and breaking goals into achievable steps increases confidence and progress",
       "Action plans and accountability help overcome barriers and keep you on track"
-    ]
+    ],
+    "image": "/images/2.B.01/takeaway.jpg"
   }
 ]

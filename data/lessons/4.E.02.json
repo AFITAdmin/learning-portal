@@ -6,7 +6,8 @@
     "reference": "4.E.02",
     "pds_stage": "PDS 4",
     "text": "Research and explain the key aspects of the labour market and the education system.",
-    "cdi_links": "4.E.02 Researching the labour market and the education system"
+    "cdi_links": "4.E.02 Researching the labour market and the education system",
+    "image": "/images/2.B.01/slide0_intro.jpg"
   },
   {
     "slide_index": 1,
@@ -18,7 +19,8 @@
       "How education pathways connect to careers",
       "How to use reliable sources for career information",
       "How labour market trends influence opportunities"
-    ]
+    ],
+    "image": "/images/2.B.01/slide1_introduction.jpg"
   },
   {
     "slide_index": 2,
@@ -29,7 +31,8 @@
       "I can explain key information about the labour market",
       "I can recognise labour market trends and future opportunities",
       "I can reflect on how my skills and interests link to real jobs"
-    ]
+    ],
+    "image": "/images/2.B.01/slide2_success_criteria.jpg"
   },
   {
     "slide_index": 3,
@@ -39,7 +42,8 @@
       "Career Pathway – The planned route you take towards a job, including courses, training, and work experience.",
       "Labour Market Trends – Patterns and changes in the world of work showing which jobs and skills are in demand.",
       "Accredited Source – A trusted and official place to find reliable information, such as government career websites or industry reports."
-    ]
+    ],
+    "image": "/images/2.B.01/slide3_keywords.jpg"
   },
   {
     "slide_index": 4,
@@ -50,7 +54,8 @@
       "It also shows how work is changing over time.",
       "Trends may include growing sectors, skill shortages, and new opportunities.",
       "Understanding these patterns helps you choose a realistic career pathway."
-    ]
+    ],
+    "image": "/images/2.B.01/slide4_kahoot.jpg"
   },
   {
     "slide_index": 5,
@@ -61,13 +66,15 @@
       "Industry reports can show which jobs are growing or declining.",
       "Training providers can explain qualification pathways.",
       "Reliable information helps you make informed career decisions."
-    ]
+    ],
+    "image": "/images/2.B.01/slide5_discussion.jpg"
   },
   {
     "slide_index": 6,
     "type": "activity",
     "title": "Activity 1 – Career Research",
-    "text": "Choose a career you are curious about"
+    "text": "Choose a career you are curious about",
+    "image": "/images/2.B.01/activity.jpg"
   },
   {
     "slide_index": 7,
@@ -85,7 +92,8 @@
       "ideas",
       "plans",
       "skills"
-    ]
+    ],
+    "image": "/images/2.B.01/cloze.jpg"
   },
   {
     "slide_index": 8,
@@ -95,6 +103,7 @@
       "The labour market shows how jobs and skills change over time",
       "Reliable information sources help you understand career opportunities",
       "Researching jobs helps you plan future education and career pathways"
-    ]
+    ],
+    "image": "/images/2.B.01/takeaway.jpg"
   }
 ]

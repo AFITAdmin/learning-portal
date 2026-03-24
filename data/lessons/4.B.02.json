@@ -6,7 +6,8 @@
     "reference": "4.B.02",
     "pds_stage": "PDS 4",
     "text": "Explore how to maintain your health, manage stress, and create realistic goals to improve your wellbeing.",
-    "cdi_links": "4.B.02 Reflecting on their physical and mental wellbeing and considering how they can improve it "
+    "cdi_links": "4.B.02 Reflecting on their physical and mental wellbeing and considering how they can improve it ",
+    "image": "/images/2.B.01/slide0_intro.jpg"
   },
   {
     "slide_index": 1,
@@ -19,7 +20,8 @@
       "How to set realistic wellbeing goals",
       "Ways to maintain balance as responsibilities grow",
       "You will evaluate your current routines and plan small changes to improve your health."
-    ]
+    ],
+    "image": "/images/2.B.01/slide1_introduction.jpg"
   },
   {
     "slide_index": 2,
@@ -30,7 +32,8 @@
       "I can describe strategies to improve physical and mental health",
       "I can set a realistic goal to improve my wellbeing",
       "I can plan simple steps to maintain balance in my life"
-    ]
+    ],
+    "image": "/images/2.B.01/slide2_success_criteria.jpg"
   },
   {
     "slide_index": 3,
@@ -40,16 +43,16 @@
       "Self-Care – Actions that help you stay healthy and happy.",
       "Self-Assessment – Reviewing your habits and thinking about what you need.",
       "Stress Management – Techniques to handle pressure or difficult feelings."
-    ]
+    ],
+    "image": "/images/2.B.01/slide3_keywords.jpg"
   },
-
   {
     "slide_index": 4,
     "type": "kahoot",
     "title": "Kahoot Quiz",
-    "kahoot_link": "https://play.kahoot.it/v2/?quizId=7815fc69-ab3f-4bb5-aa4b-979129370cdf&hostId=8ab42b04-c138-4626-a4f6-03bb34a95d0b"
+    "kahoot_link": "https://play.kahoot.it/v2/?quizId=7815fc69-ab3f-4bb5-aa4b-979129370cdf&hostId=8ab42b04-c138-4626-a4f6-03bb34a95d0b",
+    "image": "/images/2.B.01/slide4_kahoot.jpg"
   },
-
   {
     "slide_index": 5,
     "type": "discussion",
@@ -58,7 +61,8 @@
       "What do you do to take care of yourself each day?",
       "Which activities make you feel relaxed or happy?",
       "Which tasks or routines make you feel stressed or tired?"
-    ]
+    ],
+    "image": "/images/2.B.01/slide5_discussion.jpg"
   },
   {
     "slide_index": 6,
@@ -68,7 +72,8 @@
       "Exercise – Keeps your body healthy and reduces stress",
       "Sleep – Supports concentration, mood, and energy",
       "Healthy Eating – Fuels the body and brain"
-    ]
+    ],
+    "image": "/images/2.B.01/slide6_learning.jpg"
   },
   {
     "slide_index": 7,
@@ -78,15 +83,16 @@
       "Relaxation & Mindfulness – Helps manage pressure",
       "Talking to Someone – Sharing worries with friends, family, or mentors",
       "Digital Boundaries – Limiting screen time for mental rest"
-    ]
+    ],
+    "image": "/images/2.B.01/slide7_learning.jpg"
   },
   {
     "slide_index": 8,
     "type": "activity",
     "title": "Activity",
-    "text": "Current habits that support wellbeing & Habits or routines that could be improved"
+    "text": "Current habits that support wellbeing & Habits or routines that could be improved",
+    "image": "/images/2.B.01/activity.jpg"
   },
-
   {
     "slide_index": 9,
     "type": "cloze",
@@ -104,9 +110,9 @@
       "success",
       "stress",
       "emails"
-    ]
+    ],
+    "image": "/images/2.B.01/cloze.jpg"
   },
-  
   {
     "slide_index": 10,
     "type": "content",
@@ -116,6 +122,7 @@
       "Small, realistic goals build lasting habits",
       "Reflection and planning help you manage stress",
       "Maintaining balance supports longterm success and happiness"
-    ]
+    ],
+    "image": "/images/2.B.01/takeaway.jpg"
   }
 ]

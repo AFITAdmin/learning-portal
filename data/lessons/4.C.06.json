@@ -6,7 +6,8 @@
     "reference": "4.C.06",
     "pds_stage": "PDS 4",
     "text": "Researching entrepreneurialism and self-employment. You will explore how independent careers begin, develop, and succeed.",
-    "cdi_links": "4.C.06 Researching entrepreneurialism and self-employment"
+    "cdi_links": "4.C.06 Researching entrepreneurialism and self-employment",
+    "image": "/images/2.B.01/slide0_intro.jpg"
   },
   {
     "slide_index": 1,
@@ -17,7 +18,8 @@
       "This lesson explores real examples, the skills required, and how independent careers develop",
       "You will research, reflect, and consider whether this type of career suits you",
       "Lesson outline: explore concepts, research a role, identify skills and challenges, present findings, reflect on personal fit"
-    ]
+    ],
+    "image": "/images/2.B.01/slide1_introduction.jpg"
   },
   {
     "slide_index": 2,
@@ -27,7 +29,8 @@
       "I can explain what entrepreneurialism and self-employment mean",
       "I can research a real example of an entrepreneur or self-employed role",
       "I can identify challenges and skills linked to independent careers"
-    ]
+    ],
+    "image": "/images/2.B.01/slide2_success_criteria.jpg"
   },
   {
     "slide_index": 3,
@@ -38,7 +41,8 @@
       "Entrepreneurial Strategy – A plan for starting, running, and growing a business",
       "Resilience – The ability to keep going after setbacks or difficulties",
       "Career Independence – Taking control of your own career path and decisions"
-    ]
+    ],
+    "image": "/images/2.B.01/slide3_keywords.jpg"
   },
   {
     "slide_index": 4,
@@ -47,7 +51,8 @@
     "bullets": [
       "What appeals to you about working for yourself?",
       "Why do you think resilience is important in independent careers?"
-    ]
+    ],
+    "image": "/images/2.B.01/slide4_kahoot.jpg"
   },
   {
     "slide_index": 5,
@@ -58,30 +63,34 @@
       "Self-employment means working independently and may involve trades, freelancing, online selling, or running a business",
       "Many independent careers start small and evolve over time, influenced by technology, society, and customer needs",
       "Success requires responsibility, planning, and flexibility"
-    ]
+    ],
+    "image": "/images/2.B.01/slide5_discussion.jpg"
   },
   {
     "slide_index": 6,
     "type": "activity",
     "title": "Activity – Exploring Independent Careers",
-    "text": "Choose a self-employed role to research. Record key information on: what the role involves, skills needed, challenges and benefits. Reflect on whether this type of work could suit you and why or why not."
+    "text": "Choose a self-employed role to research. Record key information on: what the role involves, skills needed, challenges and benefits. Reflect on whether this type of work could suit you and why or why not.",
+    "image": "/images/2.B.01/activity.jpg"
   },
-
-  {"slide_index": 7, 
-  "type": "cloze", 
-  "title": "Independent Careers", 
-  "sentence": "Independent careers require ______, planning, and flexibility.", 
-  "answers": ["responsibility"], 
-  "options": [
-    "responsibility", 
-    "control", 
-    "rules", 
-    "competition", 
-    "inspiration", 
-    "isolation"
-    ]
+  {
+    "slide_index": 7,
+    "type": "cloze",
+    "title": "Independent Careers",
+    "sentence": "Independent careers require ______, planning, and flexibility.",
+    "answers": [
+      "responsibility"
+    ],
+    "options": [
+      "responsibility",
+      "control",
+      "rules",
+      "competition",
+      "inspiration",
+      "isolation"
+    ],
+    "image": "/images/2.B.01/cloze.jpg"
   },
-
   {
     "slide_index": 8,
     "type": "content",
@@ -89,6 +98,7 @@
     "bullets": [
       "Entrepreneurial and self-employed careers require initiative, resilience, and adaptability",
       "Researching and understanding independent roles helps you make informed choices about your career path"
-    ]
+    ],
+    "image": "/images/2.B.01/takeaway.jpg"
   }
 ]

@@ -6,7 +6,8 @@
     "reference": "4.E.03",
     "pds_stage": "PDS 4",
     "text": "Identify which learning pathway you want to pursue and explain the steps required to succeed in it.",
-    "cdi_links": "4.E.03 Recognising the main learning pathways and considering which one they want to follow and how they will access and succeed in it"
+    "cdi_links": "4.E.03 Recognising the main learning pathways and considering which one they want to follow and how they will access and succeed in it",
+    "image": "/images/2.B.01/slide0_intro.jpg"
   },
   {
     "slide_index": 1,
@@ -18,7 +19,8 @@
       "How to decide which pathway suits your goals",
       "Entry requirements for different pathways",
       "How to plan steps to succeed in your chosen route"
-    ]
+    ],
+    "image": "/images/2.B.01/slide1_introduction.jpg"
   },
   {
     "slide_index": 2,
@@ -29,7 +31,8 @@
       "I can explain the entry requirements for that pathway",
       "I can describe possible careers linked to the pathway",
       "I can plan steps that will help me succeed"
-    ]
+    ],
+    "image": "/images/2.B.01/slide2_success_criteria.jpg"
   },
   {
     "slide_index": 3,
@@ -40,7 +43,8 @@
       "Action Plan – A step-by-step guide you create to help you reach a goal.",
       "Success Strategy – A personal approach to achieving goals in education or work.",
       "Aspirations – Your hopes or ambitions for the future."
-    ]
+    ],
+    "image": "/images/2.B.01/slide3_keywords.jpg"
   },
   {
     "slide_index": 4,
@@ -51,7 +55,8 @@
       "Students gain real workplace experience with support from job coaches and tutors.",
       "Common sectors include retail, hospitality, administration, facilities, and animal care.",
       "This pathway suits students who learn best through hands-on experience and structured support."
-    ]
+    ],
+    "image": "/images/2.B.01/slide4_kahoot.jpg"
   },
   {
     "slide_index": 5,
@@ -62,7 +67,8 @@
       "Courses may include BTECs, T Levels, and Level 2–3 certificates.",
       "Common sectors include trades, hair and beauty, hospitality, sport, and health and social care.",
       "College suits learners who want hands-on training or a pathway to further study."
-    ]
+    ],
+    "image": "/images/2.B.01/slide5_discussion.jpg"
   },
   {
     "slide_index": 6,
@@ -73,7 +79,8 @@
       "They combine real work experience with recognised qualifications.",
       "Common sectors include construction, motor vehicle, business administration, digital, and retail.",
       "This pathway suits learners who prefer learning by doing."
-    ]
+    ],
+    "image": "/images/2.B.01/slide6_learning.jpg"
   },
   {
     "slide_index": 7,
@@ -84,13 +91,15 @@
       "Common sectors include healthcare, engineering, science, education, and creative industries.",
       "A degree is usually the minimum entry requirement for these professions.",
       "University suits learners who want academic study leading to specialist careers."
-    ]
+    ],
+    "image": "/images/2.B.01/slide7_learning.jpg"
   },
   {
     "slide_index": 8,
     "type": "activity",
     "title": "Activity – Explore a Pathway",
-    "text": "Choose one of the main learning pathways after school."
+    "text": "Choose one of the main learning pathways after school.",
+    "image": "/images/2.B.01/slide8_learning.jpg"
   },
   {
     "slide_index": 9,
@@ -100,7 +109,8 @@
       "Which pathway feels like the best match for your interests?",
       "What steps will you need to take to access this pathway?",
       "What skills or qualifications should you start developing now?"
-    ]
+    ],
+    "image": "/images/2.B.01/activity.jpg"
   },
   {
     "slide_index": 10,
@@ -118,7 +128,8 @@
       "ideas",
       "plans",
       "skills"
-    ]
+    ],
+    "image": "/images/2.B.01/cloze.jpg"
   },
   {
     "slide_index": 11,
@@ -128,6 +139,7 @@
       "Different learning pathways lead to different careers",
       "Understanding entry requirements helps you prepare early",
       "Planning your next steps helps you move towards your goals"
-    ]
+    ],
+    "image": "/images/2.B.01/takeaway.jpg"
   }
 ]

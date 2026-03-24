@@ -6,7 +6,8 @@
     "reference": "4.E.01",
     "pds_stage": "PDS 4",
     "text": "Explore a wide range of jobs, learning pathways, and the qualifications and skills needed.",
-    "cdi_links": "4.E.01 Considering what jobs and roles are interesting"
+    "cdi_links": "4.E.01 Considering what jobs and roles are interesting",
+    "image": "/images/2.B.01/slide0_intro.jpg"
   },
   {
     "slide_index": 1,
@@ -18,7 +19,8 @@
       "How to research job roles and opportunities",
       "How your skills and values connect to jobs",
       "Where to find reliable career information"
-    ]
+    ],
+    "image": "/images/2.B.01/slide1_introduction.jpg"
   },
   {
     "slide_index": 2,
@@ -29,7 +31,8 @@
       "I can explain why the job role interests me",
       "I can describe the tasks involved in the job",
       "I can explain how the job matches my skills and values"
-    ]
+    ],
+    "image": "/images/2.B.01/slide2_success_criteria.jpg"
   },
   {
     "slide_index": 3,
@@ -39,7 +42,8 @@
       "Labour Market – The world of work, including jobs, skills, and opportunities.",
       "Job Research – Finding out more about a job, including tasks, skills, and working environment.",
       "Transferable Skills – Abilities that can be used in many different jobs, such as communication, teamwork, and problem solving."
-    ]
+    ],
+    "image": "/images/2.B.01/slide3_keywords.jpg"
   },
   {
     "slide_index": 4,
@@ -50,7 +54,8 @@
       "Reliable information helps you make informed choices about your future.",
       "Learning pathways such as university, college, or apprenticeships lead to different careers.",
       "Planning ahead helps you develop the skills and qualifications needed for jobs."
-    ]
+    ],
+    "image": "/images/2.B.01/slide4_kahoot.jpg"
   },
   {
     "slide_index": 5,
@@ -61,7 +66,8 @@
       "Find out what tasks people do each day.",
       "Identify the skills and qualifications needed.",
       "Understand the type of working environment."
-    ]
+    ],
+    "image": "/images/2.B.01/slide5_discussion.jpg"
   },
   {
     "slide_index": 6,
@@ -71,24 +77,35 @@
       "What kind of work makes you feel motivated?",
       "Do you prefer working with people, information, or things?",
       "What kind of environment helps you do your best work?"
-    ]
+    ],
+    "image": "/images/2.B.01/slide6_learning.jpg"
   },
   {
     "slide_index": 7,
     "type": "activity",
     "title": "Activity – Types of Work",
-    "text": "Use the pages in the booklet to help you through the activity."
+    "text": "Use the pages in the booklet to help you through the activity.",
+    "image": "/images/2.B.01/slide7_learning.jpg"
   },
-
-  {"slide_index": 8,
-  "type": "cloze",
-  "title": "Researching Jobs",
-  "text": "Fill in the blanks to complete the sentences about job research.",
-  "sentence": "Job ______ helps you understand what a job is really like, including the ______ involved, the skills needed, and the working environment.",
-  "answers": ["research", "tasks"],
-  "options": ["research", "tasks", "skills", "environment", "informed"]
+  {
+    "slide_index": 8,
+    "type": "cloze",
+    "title": "Researching Jobs",
+    "text": "Fill in the blanks to complete the sentences about job research.",
+    "sentence": "Job ______ helps you understand what a job is really like, including the ______ involved, the skills needed, and the working environment.",
+    "answers": [
+      "research",
+      "tasks"
+    ],
+    "options": [
+      "research",
+      "tasks",
+      "skills",
+      "environment",
+      "informed"
+    ],
+    "image": "/images/2.B.01/activity.jpg"
   },
-
   {
     "slide_index": 9,
     "type": "content",
@@ -97,9 +114,9 @@
       "Research helps you understand what jobs are really like",
       "Your interests, values, and skills influence career choices",
       "Exploring job sectors helps you discover new opportunities"
-    ]
+    ],
+    "image": "/images/2.B.01/cloze.jpg"
   },
-
   {
     "slide_index": 8,
     "type": "content",
@@ -108,6 +125,7 @@
       "Research helps you understand what jobs are really like",
       "Your interests, values, and skills influence career choices",
       "Exploring job sectors helps you discover new opportunities"
-    ]
+    ],
+    "image": "/images/2.B.01/takeaway.jpg"
   }
 ]

@@ -90,14 +90,11 @@ function confirmName() {
   console.log("Joining session:", session_id, selectedName);
   sessionStorage.setItem("studentName", selectedName);
 
-  // Emit without requiring an acknowledgement callback so behavior matches the existing server handler.
   socket.emit("joinSession", { session_id, name: selectedName });
 
   const loginBackdrop = document.getElementById("loginBackdrop");
   if (loginBackdrop) loginBackdrop.style.display = "none";
 }
-
-
 
 // ----------------------------
 // DOM CONTENT LOADED INIT
@@ -109,18 +106,14 @@ function init() {
   const spinBtn = document.getElementById("spinBtn");
   const okBtn = document.getElementById("okBtn");
 
-  if (joinBtn) {
-    joinBtn.addEventListener("click", joinSession);
-  }
+  if (joinBtn) joinBtn.addEventListener("click", joinSession);
   if (spinBtn) {
     spinBtn.addEventListener("click", () => {
       if (isSpinning) return;
       spinName();
     });
   }
-  if (okBtn) {
-    okBtn.addEventListener("click", confirmName);
-  }
+  if (okBtn) okBtn.addEventListener("click", confirmName);
 
   loadNames();
 }
@@ -131,7 +124,7 @@ async function joinSession() {
   const accessCodeEl = document.getElementById("accessCode");
   session_id = accessCodeEl ? accessCodeEl.value.trim() : "";
   if (!session_id) {
-    alert("Enter session code");
+    alert("Enter a session code");
     return;
   }
 
@@ -178,36 +171,73 @@ function renderSlide(index) {
 
   const slide = slides[index];
 
+  // Main wrapper for text + image
+  const slideWrapper = document.createElement("div");
+  slideWrapper.className = "slide-wrapper"; // CSS flex
+
+  // Text container
+  const textContainer = document.createElement("div");
+  textContainer.className = "slide-text";
+
   if (slide.title) {
     const title = document.createElement("h2");
     title.textContent = slide.title;
-    container.appendChild(title);
+    textContainer.appendChild(title);
   }
 
-  if (slide.text && slide.type !== "discussion" && slide.type !== "activity") {
-    const textEl = document.createElement("p");
-    textEl.textContent = slide.text;
-    container.appendChild(textEl);
+  if (slide.text && slide.type !== "discussion" && slide.type !== "activity" && slide.type !== "cloze") {
+    if (Array.isArray(slide.text)) {
+      slide.text.forEach(txt => {
+        const p = document.createElement("p");
+        p.textContent = txt;
+        textContainer.appendChild(p);
+      });
+    } else {
+      const p = document.createElement("p");
+      p.textContent = slide.text;
+      textContainer.appendChild(p);
+    }
   }
 
   if (slide.bullets && slide.type !== "discussion" && slide.type !== "activity") {
     const ul = document.createElement("ul");
-    slide.bullets.forEach((item) => {
+    slide.bullets.forEach(item => {
       const li = document.createElement("li");
       li.textContent = item;
       ul.appendChild(li);
     });
-    container.appendChild(ul);
+    textContainer.appendChild(ul);
   }
 
+  slideWrapper.appendChild(textContainer);
+
+  // Image container
+  if (slide.image) {
+    const imgContainer = document.createElement("div");
+    imgContainer.className = "slide-image-container";
+
+    const imgEl = document.createElement("img");
+    imgEl.src = slide.image;
+    imgEl.alt = slide.title || "Slide image";
+    imgEl.className = "slide-image";
+
+    imgContainer.appendChild(imgEl);
+    slideWrapper.appendChild(imgContainer);
+  }
+
+  container.appendChild(slideWrapper);
+
+  // ---------- Slide types ----------
+
+  // Kahoot
   if (slide.type === "kahoot") {
     const kahoot = document.createElement("div");
     kahoot.className = "kahoot-slide";
 
-    const img = document.createElement("img");
-    img.src = "/images/kahoot_logo.png";
-    img.className = "kahoot-logo";
-    kahoot.appendChild(img);
+   // const img = document.createElement("img");
+   // img.src = "/images/kahoot_logo.png";
+   // img.className = "kahoot-logo";
+   // kahoot.appendChild(img);
 
     const p = document.createElement("p");
     p.className = "kahoot-instructions";
@@ -230,6 +260,7 @@ function renderSlide(index) {
     container.appendChild(kahoot);
   }
 
+  // Discussion
   if (slide.type === "discussion") {
     const discussion = document.createElement("div");
     discussion.className = "discussion-box";
@@ -238,14 +269,22 @@ function renderSlide(index) {
     discussion.appendChild(strong);
 
     if (slide.text) {
-      const textEl = document.createElement("p");
-      textEl.textContent = slide.text;
-      discussion.appendChild(textEl);
+      if (Array.isArray(slide.text)) {
+        slide.text.forEach(txt => {
+          const p = document.createElement("p");
+          p.textContent = txt;
+          discussion.appendChild(p);
+        });
+      } else {
+        const p = document.createElement("p");
+        p.textContent = slide.text;
+        discussion.appendChild(p);
+      }
     }
 
     if (slide.bullets) {
       const ul = document.createElement("ul");
-      slide.bullets.forEach((item) => {
+      slide.bullets.forEach(item => {
         const li = document.createElement("li");
         li.textContent = item;
         ul.appendChild(li);
@@ -256,23 +295,27 @@ function renderSlide(index) {
     container.appendChild(discussion);
   }
 
+  // Activity
   if (slide.type === "activity") {
     const activity = document.createElement("div");
     activity.className = "activity-box";
-    const textEl = document.createElement("p");
-    textEl.textContent = slide.text || "";
-    activity.appendChild(textEl);
+
+    const p = document.createElement("p");
+    p.textContent = slide.text || "";
+    activity.appendChild(p);
+
     container.appendChild(activity);
   }
 
+  // Cloze
   if (slide.type === "cloze") {
     const sentenceParagraph = document.createElement("p");
     sentenceParagraph.className = "clozeSentence";
 
     if (!slide.sentence || !slide.sentence.includes("______")) {
-      const textEl = document.createElement("p");
-      textEl.textContent = "Cloze slide is malformed.";
-      container.appendChild(textEl);
+      const p = document.createElement("p");
+      p.textContent = "Cloze slide is malformed.";
+      container.appendChild(p);
       return;
     }
 
@@ -289,12 +332,12 @@ function renderSlide(index) {
 
     container.appendChild(sentenceParagraph);
 
-    const uniqueOptions = Array.from(new Set((slide.options || []).map((o) => o.trim())));
+    const uniqueOptions = Array.from(new Set((slide.options || []).map(o => o.trim())));
     const wordBank = document.createElement("div");
     wordBank.id = "wordBank";
     wordBank.className = "word-bank";
 
-    uniqueOptions.forEach((opt) => {
+    uniqueOptions.forEach(opt => {
       const word = document.createElement("div");
       word.className = "draggable-word";
       word.draggable = true;
@@ -310,7 +353,7 @@ function renderSlide(index) {
     const words = wordBank.querySelectorAll(".draggable-word");
     const dropZones = container.querySelectorAll(".drop-zone");
 
-    words.forEach((word) => {
+    words.forEach(word => {
       word.addEventListener("dragstart", () => {
         draggedWord = word;
         originalParent = word.parentElement;
@@ -321,8 +364,8 @@ function renderSlide(index) {
       });
     });
 
-    dropZones.forEach((zone) => {
-      zone.addEventListener("dragover", (e) => {
+    dropZones.forEach(zone => {
+      zone.addEventListener("dragover", e => {
         e.preventDefault();
         zone.classList.add("drag-over");
       });
@@ -334,7 +377,6 @@ function renderSlide(index) {
         if (!draggedWord) return;
 
         if (zone.classList.contains("filled")) {
-          // prevent replacement in already completed slot
           if (originalParent) originalParent.appendChild(draggedWord);
           draggedWord = null;
           return;
@@ -358,7 +400,7 @@ function renderSlide(index) {
             answer,
             correct,
           }),
-        }).catch((e) => console.error("Response submit failed", e));
+        }).catch(e => console.error("Response submit failed", e));
 
         if (correct) {
           zone.textContent = answer;

@@ -6,7 +6,8 @@
     "reference": "4.C.05",
     "pds_stage": "PDS 4",
     "text": "Learn how role models and leadership skills can shape your career and help you grow.",
-    "cdi_links": "4.C.05 Being able to discuss role models and reflect on leadership"
+    "cdi_links": "4.C.05 Being able to discuss role models and reflect on leadership",
+    "image": "/images/2.B.01/slide0_intro.jpg"
   },
   {
     "slide_index": 1,
@@ -17,7 +18,8 @@
       "Leadership is about guiding, supporting, and motivating others, not just holding a title",
       "This lesson explores how role models affect our development and how to practise leadership",
       "You will reflect on your own leadership and consider ways to grow these skills"
-    ]
+    ],
+    "image": "/images/2.B.01/slide1_introduction.jpg"
   },
   {
     "slide_index": 2,
@@ -28,7 +30,8 @@
       "I can describe how role models influence careers",
       "I can reflect on my own leadership skills and goals",
       "I can identify at least one way to develop leadership in my life"
-    ]
+    ],
+    "image": "/images/2.B.01/slide2_success_criteria.jpg"
   },
   {
     "slide_index": 3,
@@ -39,7 +42,8 @@
       "Career Influence – How someone or something shapes your career choices",
       "Reflection – Thinking deeply about your experiences and what they mean",
       "Professional Growth – Developing skills and qualities that help you succeed in your career"
-    ]
+    ],
+    "image": "/images/2.B.01/slide3_keywords.jpg"
   },
   {
     "slide_index": 4,
@@ -50,7 +54,8 @@
       "What do you like about how they act?",
       "Have you ever had a teacher, coach, or family member show leadership? How did it help you?",
       "Can you think of a skill or quality you admire in someone you know?"
-    ]
+    ],
+    "image": "/images/2.B.01/slide4_kahoot.jpg"
   },
   {
     "slide_index": 5,
@@ -61,24 +66,34 @@
       "Role models influence career choices, help develop skills and confidence, and demonstrate qualities you may want to practise",
       "Look for role models who inspire you by how they treat others or how they work",
       "Practise leadership skills through school projects, work experience, volunteering, or helping peers"
-    ]
+    ],
+    "image": "/images/2.B.01/slide5_discussion.jpg"
   },
   {
     "slide_index": 6,
     "type": "activity",
     "title": "Activity – Reflecting on Leadership and Role Models",
-    "text": "Identify a role model who inspires you or shows leadership."
+    "text": "Identify a role model who inspires you or shows leadership.",
+    "image": "/images/2.B.01/activity.jpg"
   },
-
-   {
+  {
     "slide_index": 7,
-     "type": "cloze",
-     "title": "Leadership Skills",
-     "sentence": "Leadership skills include ______, responsibility, problem-solving, and motivating others.",
-     "answers": ["guidance"],
-     "options": ["guidance", "control", "rules", "competition", "inspiration", "isolation"]
-   },
-
+    "type": "cloze",
+    "title": "Leadership Skills",
+    "sentence": "Leadership skills include ______, responsibility, problem-solving, and motivating others.",
+    "answers": [
+      "guidance"
+    ],
+    "options": [
+      "guidance",
+      "control",
+      "rules",
+      "competition",
+      "inspiration",
+      "isolation"
+    ],
+    "image": "/images/2.B.01/cloze.jpg"
+  },
   {
     "slide_index": 8,
     "type": "content",
@@ -86,6 +101,7 @@
     "bullets": [
       "Role models and leadership skills shape your career development and personal growth",
       "Practising leadership and learning from others helps you build confidence, responsibility, and professional skills"
-    ]
+    ],
+    "image": "/images/2.B.01/takeaway.jpg"
   }
 ]

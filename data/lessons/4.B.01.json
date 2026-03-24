@@ -1,5 +1,4 @@
 [
-
   {
     "slide_index": 0,
     "type": "content",
@@ -7,23 +6,23 @@
     "subtitle": "CDI 4.B.01",
     "reference": "4.B.01",
     "pds_stage": "PDS 4",
-    "text": "Learn how people manage their work, home, and personal time. Discover strategies to avoid burnout and protect your wellbeing."
+    "text": "Learn how people manage their work, home, and personal time. Discover strategies to avoid burnout and protect your wellbeing.",
+    "image": "/images/2.B.01/slide0_intro.jpg"
   },
-
   {
     "slide_index": 1,
     "type": "content",
     "title": "Introduction",
-    "text": "Life can feel busy — school, work, family, hobbies, and personal time all compete for attention. Some people manage it naturally, others need strategies to avoid feeling exhausted. This is called work-life balance."
+    "text": "Life can feel busy — school, work, family, hobbies, and personal time all compete for attention. Some people manage it naturally, others need strategies to avoid feeling exhausted. This is called work-life balance.",
+    "image": "/images/2.B.01/slide1_introduction.jpg"
   },
-
   {
     "slide_index": 2,
     "type": "content",
     "title": "In This Lesson",
-    "text": "You will explore how different people manage their time, practical strategies to protect wellbeing, and how to prevent burnout and stress."
+    "text": "You will explore how different people manage their time, practical strategies to protect wellbeing, and how to prevent burnout and stress.",
+    "image": "/images/2.B.01/slide2_success_criteria.jpg"
   },
-
   {
     "slide_index": 3,
     "type": "content",
@@ -33,9 +32,9 @@
       "I can identify routines and boundaries that help manage time",
       "I can describe how burnout can be prevented",
       "I can choose practical techniques to use in my own life"
-    ]
+    ],
+    "image": "/images/2.B.01/slide3_keywords.jpg"
   },
-
   {
     "slide_index": 4,
     "type": "content",
@@ -44,16 +43,16 @@
       "Burnout – Feeling exhausted from doing too much work",
       "Boundaries – Limits we set to protect our time and wellbeing",
       "Routine – A regular way of organising time and responsibilities"
-    ]
+    ],
+    "image": "/images/2.B.01/slide4_kahoot.jpg"
   },
-
   {
     "slide_index": 5,
     "type": "discussion",
     "title": "Quick Question",
-    "text": "Imagine a person who works full time, cares for family, and wants time for hobbies. What problems might they face? How could they organise their day to feel less stressed?"
+    "text": "Imagine a person who works full time, cares for family, and wants time for hobbies. What problems might they face? How could they organise their day to feel less stressed?",
+    "image": "/images/2.B.01/slide5_discussion.jpg"
   },
-
   {
     "slide_index": 6,
     "type": "content",
@@ -64,16 +63,19 @@
       "Prioritising tasks – deciding what is most important first",
       "Scheduling rest – making time for breaks, sleep, and relaxation",
       "Delegating when possible – asking others for help"
-    ]
+    ],
+    "image": "/images/2.B.01/slide6_learning.jpg"
   },
-
   {
     "slide_index": 7,
     "type": "cloze",
     "activity_id": "cloze_1",
     "title": "Complete the Sentence",
     "sentence": "People use different ______ to manage responsibilities and avoid ______.",
-    "answers": ["strategies", "burnout"],
+    "answers": [
+      "strategies",
+      "burnout"
+    ],
     "options": [
       "strategies",
       "burnout",
@@ -81,20 +83,21 @@
       "holidays",
       "stress",
       "emails"
-    ]
+    ],
+    "image": "/images/2.B.01/activity.jpg"
   },
-
   {
     "slide_index": 8,
     "type": "activity",
     "title": "Activity: Evaluating Time Management",
-    "text": "Explore how different people balance their responsibilities and consider which techniques could work best for you."
+    "text": "Explore how different people balance their responsibilities and consider which techniques could work best for you.",
+    "image": "/images/2.B.01/cloze.jpg"
   },
-
   {
     "slide_index": 9,
     "type": "content",
     "title": "Well Done",
-    "text": "Everyone organises life differently. Clear routines and boundaries protect wellbeing and productivity. Planning your time today builds habits that help you succeed in the future."
+    "text": "Everyone organises life differently. Clear routines and boundaries protect wellbeing and productivity. Planning your time today builds habits that help you succeed in the future.",
+    "image": "/images/2.B.01/takeaway.jpg"
   }
 ]

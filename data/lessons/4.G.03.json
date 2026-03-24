@@ -5,7 +5,8 @@
     "title": "Embracing Challenges – Growing Through New Experiences",
     "reference": "4.G.03",
     "pds_stage": "PDS 4",
-    "text": "Reflect deeply on your achievements, including the challenges you faced, and link your SMART goal to your future career aspirations."
+    "text": "Reflect deeply on your achievements, including the challenges you faced, and link your SMART goal to your future career aspirations.",
+    "image": "/images/2.B.01/slide0_intro.jpg"
   },
   {
     "slide_index": 1,
@@ -15,7 +16,8 @@
       "Adaptability – Being able to change when needed",
       "Aspirations – Things you hope for in the future",
       "Growth Mindset – Believing you can improve with practice"
-    ]
+    ],
+    "image": "/images/2.B.01/slide1_introduction.jpg"
   },
   {
     "slide_index": 2,
@@ -25,24 +27,35 @@
       "Adaptability allows you to respond effectively to uncertainty or difficulty",
       "Recognising the value in challenges helps develop resilience and insight",
       "Growth mindset focuses on learning from experiences and improving skills"
-    ]
+    ],
+    "image": "/images/2.B.01/slide2_success_criteria.jpg"
   },
   {
     "slide_index": 3,
     "type": "activity",
     "title": "Activities",
-    "text":   "Pushing Your Boundaries"
+    "text": "Pushing Your Boundaries",
+    "image": "/images/2.B.01/slide3_keywords.jpg"
   },
-
-   {
+  {
     "slide_index": 4,
     "title": "Embracing Challenges",
     "type": "cloze",
     "sentence": "Trying new challenges can build ______ and develop a ______ mindset.",
-    "answers": ["confidence", "growth"],
-    "options": ["confidence", "growth", "comfort", "fixed", "routine", "fear"]
+    "answers": [
+      "confidence",
+      "growth"
+    ],
+    "options": [
+      "confidence",
+      "growth",
+      "comfort",
+      "fixed",
+      "routine",
+      "fear"
+    ],
+    "image": "/images/2.B.01/slide4_kahoot.jpg"
   },
-
   {
     "slide_index": 5,
     "type": "content",
@@ -50,6 +63,7 @@
     "bullets": [
       "Challenging yourself develops adaptability, resilience, and a growth mindset",
       "Linking experiences to goals helps turn challenges into progress for your future"
-    ]
+    ],
+    "image": "/images/2.B.01/slide5_discussion.jpg"
   }
 ]

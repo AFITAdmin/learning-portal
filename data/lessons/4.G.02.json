@@ -5,7 +5,8 @@
     "title": "Linking Learning to Your Future",
     "reference": "4.G.01 / 4.G.02",
     "pds_stage": "PDS 4",
-    "text": "Responding positively to help, support, and feedback, and engaging in learning to take action for good outcomes."
+    "text": "Responding positively to help, support, and feedback, and engaging in learning to take action for good outcomes.",
+    "image": "/images/2.B.01/slide0_intro.jpg"
   },
   {
     "slide_index": 1,
@@ -15,7 +16,8 @@
       "Career Path – The direction your working life might take, based on your interests and goals",
       "SMART Goal – A goal that is Specific, Measurable, Achievable, Relevant, and Time-bound",
       "Motivation – The reason or drive behind wanting to learn or achieve something"
-    ]
+    ],
+    "image": "/images/2.B.01/slide1_introduction.jpg"
   },
   {
     "slide_index": 2,
@@ -27,13 +29,15 @@
       "Achievable – Realistic for your ability and resources",
       "Relevant – Connected to your bigger goal or future",
       "Time-bound – Has a deadline or time limit"
-    ]
+    ],
+    "image": "/images/2.B.01/slide2_success_criteria.jpg"
   },
   {
     "slide_index": 3,
     "type": "activity",
     "title": "Activities – Engaging with SMART Goals",
-    "text": "Match SMART letters with their definitions and examples"
+    "text": "Match SMART letters with their definitions and examples",
+    "image": "/images/2.B.01/slide3_keywords.jpg"
   },
   {
     "slide_index": 4,
@@ -51,7 +55,8 @@
       "plans",
       "values",
       "paths"
-    ]
+    ],
+    "image": "/images/2.B.01/slide4_kahoot.jpg"
   },
   {
     "slide_index": 5,
@@ -60,6 +65,7 @@
     "bullets": [
       "Setting clear, measurable, achievable, relevant, and time-bound goals helps you make real progress in learning and career planning",
       "Positive engagement, motivation, and support from others are essential to achieve your goals"
-    ]
+    ],
+    "image": "/images/2.B.01/slide5_discussion.jpg"
   }
 ]
