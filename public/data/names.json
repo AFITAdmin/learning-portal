@@ -1,4 +1,19 @@
 {
-  "adjectives": ["Swift", "Red", "Flying", "Iron", "Thunder", "Rapid", "Blue", "Wild", "Crazy", "Lucky", "Fierce", "Speedy"],
+  "adjectives": [
+  "Swift", "Red", "Flying", "Iron", "Thunder", "Rapid", "Blue", "Wild",
+  "Crazy", "Lucky", "Fierce", "Speedy", "Brave", "Golden", "Shadow", "Silver",
+  "Stormy", "Mighty", "Silent", "Vivid", "Clever", "Burning", "Glorious", "Epic",
+  "Bold", "Electric", "Crimson", "Radiant", "Fearless", "Nimble", "Stealthy", "Gallant",
+  "Mystic", "Thunderous", "Sonic", "Blazing", "Lightning", "Scarlet", "Savage", "Rapidfire",
+  "Ironclad", "Stormbreaker", "Firebrand", "Shadowfax", "Emerald", "Goldeneye", "Phantom", "Obsidian",
+  "Titan", "Aero", "Vortex", "Frost", "Blizzard", "Inferno", "Tempest", "Rocket",
+  "Comet", "Falcon", "Jaguar", "Panther", "Wolf", "Tiger", "Dragon", "Hurricane",
+  "Cyclone", "Avalanche", "Thunderbolt", "Sky", "Nova", "Quantum", "Meteor", "Starlight",
+  "Nebula", "Cosmic", "Solar", "Lunar", "Galaxy", "Plasma", "Crimsonclaw", "Nightshade",
+  "Ironfang", "Steelwing", "Shadowstrike", "Firestorm", "Glacier", "Oblivion", "Phantomstrike", "Vigilant",
+  "Stormfang", "Shadowfire", "Blazefury", "Quickblade", "Dusk", "Aurora", "Specter", "Rogue",
+  "Onyx", "Cobalt", "Titanium", "Ember", "Volt", "Feral", "Sable", "Hyper",
+  "Raven", "Eclipse", "Frostbite", "Lightningstrike"
+],
   "manufacturers": ["KTM", "Yamaha", "Honda", "Suzuki", "Kawasaki", "Husqvarna", "Beta", "GasGas", "TM", "Sherco"]
 }
