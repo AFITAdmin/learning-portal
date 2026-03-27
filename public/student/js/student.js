@@ -39,10 +39,15 @@ function updateAttemptsText() {
 }
 
 function spinName() {
+  const display = document.getElementById("spinnerDisplay");
+display.classList.add("spinning");
+
   if (attempts <= 0) {
     alert("No attempts left!");
     return;
   }
+  // when finished
+display.classList.remove("spinning");
 
   const adjDisplay = document.getElementById("adjDisplay");
   const manuDisplay = document.getElementById("manuDisplay");
