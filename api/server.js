@@ -136,6 +136,34 @@ app.get("/api/session/:code", (req, res) => {
 });
 
 // -----------------------------
+// GET CURRENT STUDENTS IN SESSION
+// -----------------------------
+
+app.get("/api/session/:code/students", (req, res) => {
+  const code = req.params.code;
+
+  const { error } = validateSessionCode(code);
+  if (error) {
+    return res.status(400).json({ error: "Invalid session code" });
+  }
+
+  const session = sessions[code];
+  if (!session) {
+    return res.status(404).json({ error: "Session not found" });
+  }
+
+  // Convert object -> array
+  const studentsArray = Object.entries(session.students).map(
+    ([socket_id, data]) => ({
+      socket_id,
+      name: data.name
+    })
+  );
+
+  res.json(studentsArray);
+});
+
+// -----------------------------
 // STORE STUDENT RESPONSES
 // -----------------------------
 
@@ -182,6 +210,13 @@ io.on("connection", (socket) => {
 
       console.log(`Teacher joined session ${session_id}`);
 
+      // SEND CURRENT SLIDE TO TEACHER
+      if (sessions[session_id]) {
+        socket.emit("updateSlide", {
+          slide_index: sessions[session_id].slide_index
+        });
+      }
+
       return;
 
     }
@@ -195,6 +230,11 @@ io.on("connection", (socket) => {
     }
 
     socket.join(session_id);
+
+    // SEND CURRENT SLIDE TO STUDENT
+    socket.emit("updateSlide", {
+      slide_index: sessions[session_id].slide_index
+    });
 
     sessions[session_id].students[socket.id] = {
       name

@@ -1,17 +1,20 @@
 [
   {
     "name": "PDS 2",
+    "title": "Personal Development Stage 2",
     "number": 2,
-    "color": "#006f7c"
+    "color": "#009f7c"
   },
   {
     "name": "PDS 3",
+    "title": "Personal Development Stage 3",
     "number": 3,
-    "color": "#006f7c"
+    "color": "#628"
   },
   {
     "name": "PDS 4",
+    "title": "Personal Development Stage 4",
     "number": 4,
-    "color": "#006f7c"
+    "color": "#f42"
   }
 ]

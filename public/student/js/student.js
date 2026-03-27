@@ -1,4 +1,7 @@
-// student.js
+// =============================
+// student.js - FULL UPDATE
+// =============================
+
 const socket = io();
 
 let session_id = null;
@@ -12,8 +15,8 @@ let adjectives = [];
 let manufacturers = [];
 let attempts = 3;
 let selectedName = "";
+let isSpinning = false;
 
-// Load names from JSON
 async function loadNames() {
   try {
     const res = await fetch("/data/names.json");
@@ -35,7 +38,6 @@ function updateAttemptsText() {
   if (elem) elem.textContent = `Attempts left: ${attempts}`;
 }
 
-// Spin name with two "reels" and rolling animation
 function spinName() {
   if (attempts <= 0) {
     alert("No attempts left!");
@@ -54,14 +56,12 @@ function spinName() {
   okBtn.disabled = true;
 
   let cycle = 0;
-  const totalCycles = 20;
-
   const interval = setInterval(() => {
     adjDisplay.textContent = getRandomElement(adjectives);
     manuDisplay.textContent = getRandomElement(manufacturers);
-
     cycle++;
-    if (cycle >= totalCycles) {
+
+    if (cycle >= 20) {
       clearInterval(interval);
       selectedName = `${adjDisplay.textContent} ${manuDisplay.textContent}`;
       attempts--;
@@ -73,7 +73,24 @@ function spinName() {
   }, 50);
 }
 
-// Confirm name selection and join session
+// ----------------------------
+// LOGIN OVERLAY
+// ----------------------------
+function showLoginOverlay() {
+  const backdrop = document.getElementById("loginBackdrop");
+  if (!backdrop) return;
+  backdrop.classList.remove("hidden");
+  // small timeout to trigger CSS transition
+  setTimeout(() => backdrop.classList.add("visible"), 20);
+}
+
+function hideLoginOverlay() {
+  const backdrop = document.getElementById("loginBackdrop");
+  if (!backdrop) return;
+  backdrop.classList.remove("visible");
+  setTimeout(() => backdrop.classList.add("hidden"), 400);
+}
+
 function confirmName() {
   if (!selectedName) {
     alert("Spin to generate a name first!");
@@ -84,52 +101,89 @@ function confirmName() {
     return;
   }
 
-  const okBtn = document.getElementById("okBtn");
-  if (okBtn) okBtn.disabled = true;
-
-  console.log("Joining session:", session_id, selectedName);
-  sessionStorage.setItem("studentName", selectedName);
-
+  localStorage.setItem("studentSession", JSON.stringify({ session_id, name: selectedName }));
   socket.emit("joinSession", { session_id, name: selectedName });
 
-  const loginBackdrop = document.getElementById("loginBackdrop");
-  if (loginBackdrop) loginBackdrop.style.display = "none";
+  hideLoginOverlay();
+
+  displayStudentName(selectedName);
 }
 
 // ----------------------------
-// DOM CONTENT LOADED INIT
+// HEADER DISPLAY
 // ----------------------------
-let isSpinning = false;
+function displayStudentName(name) {
+  const header = document.getElementById("studentHeader");
+  const nameSpan = document.getElementById("studentNameDisplay");
+  if (!header || !nameSpan) return;
 
+  nameSpan.textContent = name;
+  header.classList.remove("hidden");
+}
+
+// ----------------------------
+// INITIALISATION
+// ----------------------------
 function init() {
-  const joinBtn = document.getElementById("joinBtn");
-  const spinBtn = document.getElementById("spinBtn");
-  const okBtn = document.getElementById("okBtn");
+  const saved = localStorage.getItem("studentSession");
 
-  if (joinBtn) joinBtn.addEventListener("click", joinSession);
-  if (spinBtn) {
-    spinBtn.addEventListener("click", () => {
-      if (isSpinning) return;
-      spinName();
-    });
+  if (saved) {
+    try {
+      const { session_id: savedSession, name } = JSON.parse(saved);
+      if (savedSession && name) {
+        session_id = savedSession;
+
+        fetch(`/api/session/${session_id}`)
+          .then(res => {
+            if (!res.ok) throw new Error("Session expired");
+            return res.json();
+          })
+          .then(data => {
+            slides = data.slides || [];
+            currentSlide = data.slide_index || 0;
+
+            hideLoginOverlay();
+
+            renderSlide(currentSlide);
+            socket.emit("joinSession", { session_id, name });
+            displayStudentName(name);
+          })
+          .catch(() => localStorage.removeItem("studentSession"));
+      } else {
+        showLoginOverlay();
+      }
+    } catch {
+      localStorage.removeItem("studentSession");
+      showLoginOverlay();
+    }
+  } else {
+    showLoginOverlay();
   }
-  if (okBtn) okBtn.addEventListener("click", confirmName);
+
+  document.getElementById("joinBtn")?.addEventListener("click", joinSession);
+  document.getElementById("spinBtn")?.addEventListener("click", () => {
+    if (!isSpinning) spinName();
+  });
+  document.getElementById("okBtn")?.addEventListener("click", confirmName);
 
   loadNames();
 }
 
 document.addEventListener("DOMContentLoaded", init);
 
+// ----------------------------
+// JOIN SESSION
+// ----------------------------
 async function joinSession() {
   const accessCodeEl = document.getElementById("accessCode");
-  session_id = accessCodeEl ? accessCodeEl.value.trim() : "";
+  session_id = accessCodeEl?.value.trim() || "";
+
   if (!session_id) {
     alert("Enter a session code");
     return;
   }
 
-  const joinBtn = document.getElementById("joinBtn");
-  if (joinBtn) joinBtn.disabled = true;
+  document.getElementById("joinBtn").disabled = true;
 
   try {
     const res = await fetch(`/api/session/${session_id}`);
@@ -139,20 +193,18 @@ async function joinSession() {
     slides = data.slides || [];
     currentSlide = data.slide_index || 0;
 
-    const loginPanel = document.getElementById("loginPanel");
-    const nameSpinnerContainer = document.getElementById("nameSpinnerContainer");
-    if (loginPanel) loginPanel.style.display = "none";
-    if (nameSpinnerContainer) nameSpinnerContainer.style.display = "flex";
+    document.getElementById("loginPanel")?.classList.add("hidden");
+    document.getElementById("nameSpinnerContainer")?.classList.remove("hidden");
 
     renderSlide(currentSlide);
   } catch (err) {
     alert(err.message);
-    if (joinBtn) joinBtn.disabled = false;
+    document.getElementById("joinBtn").disabled = false;
   }
 }
 
 // ----------------------------
-// RECEIVE SLIDE CHANGES
+// SOCKET EVENTS
 // ----------------------------
 socket.on("updateSlide", ({ slide_index }) => {
   currentSlide = slide_index;
@@ -160,127 +212,138 @@ socket.on("updateSlide", ({ slide_index }) => {
 });
 
 // ----------------------------
-// RENDER SLIDE
+// SLIDE RENDERING
 // ----------------------------
 function renderSlide(index) {
   const container = document.getElementById("slideContainer");
   if (!container) return;
+
   container.innerHTML = "";
 
-  if (!slides[index]) return;
-
   const slide = slides[index];
+  if (!slide) return;
 
-  // Main wrapper for text + image
-  const slideWrapper = document.createElement("div");
-  slideWrapper.className = "slide-wrapper"; // CSS flex
+  if (["activity", "discussion", "kahoot", "cloze"].includes(slide.type)) {
+    renderSlideType(slide, container);
+    updateFooter(slide);
+    return;
+  }
 
-  // Text container
-  const textContainer = document.createElement("div");
-  textContainer.className = "slide-text";
+  const wrapper = document.createElement("div");
+  wrapper.className = "slide-wrapper";
+
+  const text = document.createElement("div");
+  text.className = "slide-text";
 
   if (slide.title) {
-    const title = document.createElement("h2");
-    title.textContent = slide.title;
-    textContainer.appendChild(title);
+    const h2 = document.createElement("h2");
+    h2.textContent = slide.title;
+    text.appendChild(h2);
   }
 
-  if (slide.text && slide.type !== "discussion" && slide.type !== "activity" && slide.type !== "cloze") {
-    if (Array.isArray(slide.text)) {
-      slide.text.forEach(txt => {
-        const p = document.createElement("p");
-        p.textContent = txt;
-        textContainer.appendChild(p);
-      });
-    } else {
+  if (slide.text) {
+    const texts = Array.isArray(slide.text) ? slide.text : [slide.text];
+    texts.forEach(t => {
       const p = document.createElement("p");
-      p.textContent = slide.text;
-      textContainer.appendChild(p);
-    }
+      p.textContent = t;
+      text.appendChild(p);
+    });
   }
 
-  if (slide.bullets && slide.type !== "discussion" && slide.type !== "activity") {
+  if (slide.bullets) {
     const ul = document.createElement("ul");
     slide.bullets.forEach(item => {
       const li = document.createElement("li");
       li.textContent = item;
       ul.appendChild(li);
     });
-    textContainer.appendChild(ul);
+    text.appendChild(ul);
   }
 
-  slideWrapper.appendChild(textContainer);
+  wrapper.appendChild(text);
 
-  // Image container
   if (slide.image) {
     const imgContainer = document.createElement("div");
     imgContainer.className = "slide-image-container";
 
-    const imgEl = document.createElement("img");
-    imgEl.src = slide.image;
-    imgEl.alt = slide.title || "Slide image";
-    imgEl.className = "slide-image";
+    const box = document.createElement("div");
+    box.className = "slide-image-box";
 
-    imgContainer.appendChild(imgEl);
-    slideWrapper.appendChild(imgContainer);
+    const img = document.createElement("img");
+    img.src = slide.image;
+    img.alt = slide.title || "Slide image";
+    img.className = "slide-image";
+
+    box.appendChild(img);
+    imgContainer.appendChild(box);
+    wrapper.appendChild(imgContainer);
   }
 
-  container.appendChild(slideWrapper);
+  container.appendChild(wrapper);
+  updateFooter(slide);
+}
 
-  // ---------- Slide types ----------
+// ----------------------------
+// SLIDE TYPES (activity, discussion, kahoot, cloze)
+// ----------------------------
+function renderSlideType(slide, container) {
+  const wrapper = document.createElement("div");
+  wrapper.className = "slide-wrapper activity-layout";
 
-  // Kahoot
-  if (slide.type === "kahoot") {
-    const kahoot = document.createElement("div");
-    kahoot.className = "kahoot-slide";
-
-   // const img = document.createElement("img");
-   // img.src = "/images/kahoot_logo.png";
-   // img.className = "kahoot-logo";
-   // kahoot.appendChild(img);
-
-    const p = document.createElement("p");
-    p.className = "kahoot-instructions";
-
-    p.appendChild(document.createTextNode("Go to "));
-    const a = document.createElement("a");
-    a.href = "https://kahoot.it";
-    a.target = "_blank";
-    a.rel = "noopener";
-
-    const strong = document.createElement("strong");
-    strong.textContent = "kahoot.it";
-
-    a.appendChild(strong);
-    p.appendChild(a);
-    p.appendChild(document.createTextNode(" to join the quiz"));
-
-    kahoot.appendChild(p);
-
-    container.appendChild(kahoot);
+  if (slide.title) {
+    const h2 = document.createElement("h2");
+    h2.textContent = slide.title;
+    wrapper.appendChild(h2);
   }
 
-  // Discussion
+  if (slide.type === "activity") {
+    if (slide.image) {
+      const imgContainer = document.createElement("div");
+      imgContainer.className = "slide-image-container activity-image";
+
+      const box = document.createElement("div");
+      box.className = "slide-image-box";
+
+      const img = document.createElement("img");
+      img.src = slide.image;
+      img.className = "slide-image";
+
+      box.appendChild(img);
+      imgContainer.appendChild(box);
+      wrapper.appendChild(imgContainer);
+    }
+
+    const activity = document.createElement("div");
+    activity.className = "activity-box";
+
+    const texts = Array.isArray(slide.text) ? slide.text : [slide.text];
+    texts.forEach(t => {
+      if (!t) return;
+      const p = document.createElement("p");
+      p.textContent = t;
+      activity.appendChild(p);
+    });
+
+    wrapper.appendChild(activity);
+    container.appendChild(wrapper);
+    return;
+  }
+
   if (slide.type === "discussion") {
-    const discussion = document.createElement("div");
-    discussion.className = "discussion-box";
+    const box = document.createElement("div");
+    box.className = "discussion-box";
+
     const strong = document.createElement("strong");
     strong.textContent = "Discuss:";
-    discussion.appendChild(strong);
+    box.appendChild(strong);
 
-    if (slide.text) {
-      if (Array.isArray(slide.text)) {
-        slide.text.forEach(txt => {
-          const p = document.createElement("p");
-          p.textContent = txt;
-          discussion.appendChild(p);
-        });
-      } else {
-        const p = document.createElement("p");
-        p.textContent = slide.text;
-        discussion.appendChild(p);
-      }
-    }
+    const texts = Array.isArray(slide.text) ? slide.text : [slide.text];
+    texts.forEach(t => {
+      if (!t) return;
+      const p = document.createElement("p");
+      p.textContent = t;
+      box.appendChild(p);
+    });
 
     if (slide.bullets) {
       const ul = document.createElement("ul");
@@ -289,33 +352,29 @@ function renderSlide(index) {
         li.textContent = item;
         ul.appendChild(li);
       });
-      discussion.appendChild(ul);
+      box.appendChild(ul);
     }
 
-    container.appendChild(discussion);
+    container.appendChild(box);
+    return;
   }
 
-  // Activity
-  if (slide.type === "activity") {
-    const activity = document.createElement("div");
-    activity.className = "activity-box";
-
-    const p = document.createElement("p");
-    p.textContent = slide.text || "";
-    activity.appendChild(p);
-
-    container.appendChild(activity);
+  if (slide.type === "kahoot") {
+    const div = document.createElement("div");
+    div.className = "kahoot-slide";
+    div.innerHTML = `Go to <strong>kahoot.it</strong> to join the quiz`;
+    container.appendChild(div);
+    return;
   }
 
-  // Cloze
   if (slide.type === "cloze") {
     const sentenceParagraph = document.createElement("p");
     sentenceParagraph.className = "clozeSentence";
 
     if (!slide.sentence || !slide.sentence.includes("______")) {
-      const p = document.createElement("p");
-      p.textContent = "Cloze slide is malformed.";
-      container.appendChild(p);
+      sentenceParagraph.textContent = "Cloze slide is malformed.";
+      wrapper.appendChild(sentenceParagraph);
+      container.appendChild(wrapper);
       return;
     }
 
@@ -326,17 +385,17 @@ function renderSlide(index) {
         const dropZone = document.createElement("span");
         dropZone.className = "drop-zone";
         dropZone.dataset.index = index;
+        dropZone.textContent = "______";
         sentenceParagraph.appendChild(dropZone);
       }
     });
 
-    container.appendChild(sentenceParagraph);
+    wrapper.appendChild(sentenceParagraph);
 
-    const uniqueOptions = Array.from(new Set((slide.options || []).map(o => o.trim())));
     const wordBank = document.createElement("div");
-    wordBank.id = "wordBank";
     wordBank.className = "word-bank";
 
+    const uniqueOptions = Array.from(new Set((slide.options || []).map(o => o.trim())));
     uniqueOptions.forEach(opt => {
       const word = document.createElement("div");
       word.className = "draggable-word";
@@ -345,13 +404,17 @@ function renderSlide(index) {
       wordBank.appendChild(word);
     });
 
-    container.appendChild(wordBank);
+    wrapper.appendChild(wordBank);
+    container.appendChild(wrapper);
 
+    // ----------------------------
+    // drag & drop logic
+    // ----------------------------
     let draggedWord = null;
     let originalParent = null;
 
     const words = wordBank.querySelectorAll(".draggable-word");
-    const dropZones = container.querySelectorAll(".drop-zone");
+    const dropZones = wrapper.querySelectorAll(".drop-zone");
 
     words.forEach(word => {
       word.addEventListener("dragstart", () => {
@@ -367,17 +430,33 @@ function renderSlide(index) {
     dropZones.forEach(zone => {
       zone.addEventListener("dragover", e => {
         e.preventDefault();
-        zone.classList.add("drag-over");
+        const index = parseInt(zone.dataset.index, 10);
+        const correctAnswer = (slide.answers || [])[index] || "";
+
+        zone.classList.remove("incorrect-zone-highlight");
+
+        if (draggedWord && draggedWord.textContent === correctAnswer) {
+          zone.classList.add("correct-zone-highlight");
+          zone.classList.remove("drag-over");
+        } else {
+          zone.classList.add("drag-over");
+          zone.classList.remove("correct-zone-highlight");
+        }
       });
 
-      zone.addEventListener("dragleave", () => zone.classList.remove("drag-over"));
+      zone.addEventListener("dragleave", () => {
+        zone.classList.remove("drag-over");
+        zone.classList.remove("correct-zone-highlight");
+      });
 
       zone.addEventListener("drop", () => {
         zone.classList.remove("drag-over");
+        zone.classList.remove("correct-zone-highlight");
+
         if (!draggedWord) return;
 
         if (zone.classList.contains("filled")) {
-          if (originalParent) originalParent.appendChild(draggedWord);
+          originalParent?.appendChild(draggedWord);
           draggedWord = null;
           return;
         }
@@ -387,30 +466,15 @@ function renderSlide(index) {
         const correctAnswer = (slide.answers || [])[index] || "";
         const correct = answer === correctAnswer;
 
-        const studentName = sessionStorage.getItem("studentName") || "Unknown";
-
-        fetch("/api/response", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            student_id: studentName,
-            session_id,
-            activity_id: slide.activity_id,
-            question_id: index,
-            answer,
-            correct,
-          }),
-        }).catch(e => console.error("Response submit failed", e));
-
         if (correct) {
           zone.textContent = answer;
           zone.classList.add("correct", "filled");
           draggedWord.remove();
         } else {
-          draggedWord.classList.add("incorrect");
+          zone.classList.add("incorrect-zone-highlight");
           setTimeout(() => {
-            draggedWord.classList.remove("incorrect");
-            originalParent.appendChild(draggedWord);
+            zone.classList.remove("incorrect-zone-highlight");
+            originalParent?.appendChild(draggedWord);
           }, 600);
         }
 
@@ -418,4 +482,14 @@ function renderSlide(index) {
       });
     });
   }
+}
+
+// ----------------------------
+// FOOTER
+// ----------------------------
+function updateFooter(slide) {
+  const footer = document.getElementById("studentFooter");
+  if (!footer) return;
+
+  footer.textContent = slide.type ? `Slide type: ${slide.type}` : "";
 }

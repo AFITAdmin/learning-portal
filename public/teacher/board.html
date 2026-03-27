@@ -3,94 +3,157 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Teacher Board</title>
-<link rel="stylesheet" href="../css/style.css">
+<title>Lesson Board</title>
 <style>
-  body {
-    font-family: "Segoe UI", sans-serif;
-    background: #b8ffee;
-    color: #000000;
-    margin:0;
-    padding:0;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-  }
+html, body { height:100%; margin:0; overflow:hidden; font-family:"Segoe UI",sans-serif; background:#b8ffee; }
+body { display:grid; grid-template-rows:70px 1fr 40px; }
 
-  #boardContainer {
-    width: 90%;
-    max-width: 1200px;
-    text-align: center;   /* center everything */
-  }
+#controlBar { display:flex; justify-content:space-between; align-items:center; padding:0 20px; background:linear-gradient(90deg,#5c2083,#7a2cb8); color:white; }
+#controlBar .centre { display:flex; align-items:center; gap:10px; }
+#slideCounter { font-weight:bold; }
+#fullscreenBtn { background:transparent;color:white;border:none;font-size:1.5rem;cursor:pointer;padding:0 10px; }
+#fullscreenBtn:hover { color:#ddd; }
 
-  h1 {
-    font-size: 5rem;      /* big for slide titles */
-    margin-bottom: 2rem;
-  }
-
-  p {
-    font-size: 2.5rem;    /* larger paragraph text */
-    line-height: 1.4;
-    margin-bottom: 2rem;
-  }
-
-  ul {
-    font-size: 3rem;      /* bullet points larger */
-    line-height: 1.6;
-    margin-bottom: 2rem;
-    padding-left: 2.5rem;
-    text-align: left;     /* bullets aligned left */
-  }
-
-  .discussion-box, .activity-box {
-    border: 5px solid #5c2083;
-    padding: 25px;
-    border-radius: 12px;
-    margin-bottom: 2rem;
-    background: rgba(255,255,255,0.1);
-    font-size: 2.5rem;    /* text inside boxes enlarged */
-    line-height: 1.5;
-  }
-
-  button.option {
-    font-size: 2rem;       /* bigger buttons for clarity */
-    padding: 15px 25px;
-    margin: 10px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-  }
-
-  button.correct {
-    background: green;
-    color: white;
-  }
-
-  button.incorrect {
-    background: red;
-    color: white;
-  }
-
-  #boardContainer ul {
-  font-size: 2rem;       /* or whatever fits your presentation */
-  line-height: 4rem;
-  margin-bottom: 2rem;
-  padding-left: 2.5rem;  /* make bullets indent nicely */
+/* -----------------------------
+   BOARD LAYOUT
+----------------------------- */
+#boardContainer {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
 }
 
-#boardContainer li {
-  font-size: 2rem;
-  line-height: 4rem;
+/* -----------------------------
+   SLIDE AREA
+----------------------------- */
+#slideContainer {
+  flex: 1;
+  overflow: hidden;
+  min-width: 0; /* IMPORTANT: prevents clipping issues */
+  padding: 1rem 1.5rem; /* prevents text from hitting sidebar edge */
+  box-sizing: border-box;
 }
+
+#slideInner {
+  flex: 1;
+  padding: 1rem 1.5rem; /* padding for text */
+  box-sizing: border-box;
+}
+
+/* -----------------------------
+   SIDEBAR
+----------------------------- */
+#studentSidebar {
+  width: 220px;
+  background: #1e1e1e;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  border-left: 2px solid #333;
+  transition: width 0.3s ease;
+  position: relative; /* needed for absolute positioning inside */
+}
+
+#studentSidebar.hidden {
+  width: 40px; /* keep a visible strip */
+}
+
+/* Header */
+#sidebarHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: #2a2a2a;
+  font-weight: bold;
+  height: 40px; /* prevents vertical movement */
+  box-sizing: border-box;
+}
+
+/* Toggle button */
+#toggleSidebar {
+  width: 100%;
+  height: 30px;
+  background: #2a2a2a;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* When sidebar is hidden, bring button into view */
+#studentSidebar.hidden #toggleSidebar {
+  left: 5px;
+}
+
+#studentSidebar.hidden #studentList {
+  display: none;
+}
+
+#studentSidebar.hidden #sidebarHeader span {
+  visibility: hidden; /* hides text but keeps layout */
+}
+
+/* Student list */
+#studentList {
+  list-style: none;
+  padding: 10px;
+  margin: 0;
+  overflow-y: auto;
+  flex: 1;
+}
+
+#studentList li {
+  padding: 6px 8px;
+  border-bottom: 1px solid #333;
+  font-size: 14px;
+}
+
+#boardContainer h1 { font-size:4.5rem; margin-bottom:1.5rem; }
+#boardContainer p { font-size:2.2rem; line-height:1.3; margin-bottom:1.5rem; }
+#boardContainer ul { font-size:2.5rem; line-height:1.4; margin-bottom:1.5rem; padding-left:2rem; text-align:left; }
+.discussion-box, .activity-box { font-size:2.2rem; line-height:1.4; padding:20px; margin-bottom:1.5rem; }
+button.option { font-size:1.8rem; padding:12px 20px; margin:8px; }
+
+#footerBar { display:flex; justify-content:center; align-items:center; background:#5c2083; color:white; font-size:0.9rem; }
 </style>
 </head>
 <body>
 
-<div id="boardContainer"></div>
+<header id="controlBar">
+  <div class="left">
+    Session: <span id="sessionDisplay">Loading...</span>
+    <button id="fullscreenBtn" title="Toggle Fullscreen">⛶</button>
+  </div>
+  <div class="centre">
+    <button id="prevSlide">◀</button>
+    <span id="slideCounter"><span id="currentSlide">0</span> / <span id="totalSlides">0</span></span>
+    <button id="nextSlide">▶</button>
+  </div>
+</header>
+
+<div id="boardContainer">
+
+  <!-- SLIDE AREA -->
+  <div id="slideContainer">
+  <div id="slideInner"></div>
+  </div>
+
+  <!-- STUDENT SIDEBAR -->
+  <div id="studentSidebar">
+    <div id="sidebarHeader">
+      <span>Students</span>
+    </div>
+    <button id="toggleSidebar">⮞</button>
+    <ul id="studentList"></ul>
+  </div>
+
+</div>
+<footer id="footerBar"><span id="todayDate"></span></footer>
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="board.js"></script>
-
 </body>
 </html>

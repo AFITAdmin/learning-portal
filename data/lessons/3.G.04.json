@@ -1,0 +1,103 @@
+[
+  {
+    "slide_index": 0,
+    "type": "content",
+    "title": "Recognising and Recording Achievements",
+    "reference": "3.G.04",
+    "pds_stage": "PDS 3",
+    "text": "Explore how to record and reflect on your achievements, linking them to personal growth and future goals.",
+    "cdi_links": "3.G.04 Recognising and reflecting on achievements and their impact on future development",
+    "image": "/images/3.G.04/slide0_intro.jpg"
+  },
+  {
+    "slide_index": 1,
+    "type": "content",
+    "title": "Introduction",
+    "text": "In this lesson, you will explore",
+    "bullets": [
+      "How to recognise your achievements",
+      "Why reflection is important",
+      "How achievements link to personal growth",
+      "How reflecting can support future goals"
+    ],
+    "image": "/images/3.G.04/slide1_introduction.jpg"
+  },
+  {
+    "slide_index": 2,
+    "type": "content",
+    "title": "Success Criteria",
+    "bullets": [
+      "I can identify my achievements",
+      "I can explain what I learned from my experiences",
+      "I can describe how achievements support personal growth",
+      "I can link achievements to future goals"
+    ],
+    "image": "/images/3.G.04/slide2_success_criteria.jpg"
+  },
+  {
+    "slide_index": 3,
+    "type": "content",
+    "title": "Key Words",
+    "bullets": [
+      "Personal Growth – Learning and improving through experiences and challenges",
+      "Resilience – The ability to keep going and bounce back after difficulties",
+      "Achievement – Something you have successfully completed or accomplished",
+      "Reflection – Thinking about what you have done and what you have learned"
+    ],
+    "image": "/images/3.G.04/slide3_keywords.jpg"
+  },
+  {
+    "slide_index": 4,
+    "type": "discussion",
+    "title": "Quick Questions",
+    "text": [
+      "What is something you have achieved recently?",
+      "How did you feel when you achieved it?",
+      "Why is it important to remember your achievements?"
+    ],
+    "image": "/images/3.G.04/slide4_discussion.jpg"
+  },
+  {
+    "slide_index": 5,
+    "type": "content",
+    "title": "Recognising Achievements",
+    "bullets": [
+      "Achievements can be big or small",
+      "They include school work, personal goals, and new skills",
+      "Recognising achievements helps build confidence",
+      "It shows what you are capable of achieving"
+    ],
+    "image": "/images/3.G.04/slide5_learning.jpg"
+  },
+  {
+    "slide_index": 6,
+    "type": "content",
+    "title": "Reflection and Growth",
+    "bullets": [
+      "Reflection means thinking about what you have done and learned",
+      "It helps you understand your strengths and areas to improve",
+      "Linking achievements to goals keeps you motivated",
+      "Every challenge you overcome supports personal growth"
+    ],
+    "image": "/images/3.G.04/slide6_learning.jpg"
+  },
+  {
+    "slide_index": 7,
+    "type": "activity",
+    "title": "Activity",
+    "text": "Take part in activities that involve recalling recent learning, identifying achievements, and reflecting on what you have learned. Consider how your achievements link to personal growth and how they may support your future goals.",
+    "image": "/images/3.G.04/activity.jpg"
+  },
+  {
+    "slide_index": 8,
+    "type": "content",
+    "title": "Key Takeaways",
+    "text": [
+      "Recognising achievements builds confidence",
+      "Reflection helps you understand your progress",
+      "Linking achievements to goals supports motivation",
+      "Personal growth comes from learning through experience"
+    ],
+    "image": "/images/3.G.04/takeaway.jpg"
+  }
+]

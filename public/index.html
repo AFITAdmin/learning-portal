@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>School Careers Lessons Resource System</title>
+<title>Careers Lessons Resource System</title>
 
 <style>
 * { box-sizing: border-box; margin:0; padding:0; }
@@ -68,7 +68,7 @@ h1 { margin-bottom: 10px; text-align:center; }
 }
 
 #backButton {
-    position: absolute;
+    position: fixed;
     top: 20px;
     left: 20px;
     padding: 10px 18px;
@@ -156,11 +156,10 @@ body.dark #infoPanel {
 </head>
 
 <body>
-
+<button id="backButton" class="hidden">← Back</button>
 <button id="darkModeToggle">Dark Mode</button>
 <h1>Careers Lessons Resource System</h1>
-<p class="subtitle">Select a card to navigate</p>
-<button id="backButton">Back</button>
+<p class="subtitle">Select a lesson card to start a session</p>
 <div id="levelsContainer"></div>
 
 <div id="infoPanel">
@@ -171,34 +170,27 @@ body.dark #infoPanel {
 </div>
 
 <script>
-
 let careersData = null;
 let progressionData = null;
 let levelHistory = [];
 let currentPDS = null;
-let infoResetTimeout = null;
 
 const levelsContainer = document.getElementById('levelsContainer');
-const backButton = document.getElementById('backButton');
 const darkModeToggle = document.getElementById('darkModeToggle');
 const infoPanel = document.getElementById("infoPanel");
 const infoTitle = document.getElementById("infoTitle");
 const infoText = document.getElementById("infoText");
+let infoResetTimeout = null;
 
-/* =========================
-   LOAD JSON FILES DYNAMICALLY
-========================= */
-
+// Load JSON data
 Promise.all([
   fetch("data/pdsLevels.json").then(res => res.json()),
   fetch("data/baseAreas.json").then(res => res.json()),
   fetch("data/progressionData.json").then(res => res.json())
 ])
 .then(([pdsLevels, baseAreas, progression]) => {
-
   progressionData = progression;
 
-  // Build careersData dynamically
   careersData = pdsLevels.map(pds => ({
     ...pds,
     areas: baseAreas.map(area => ({
@@ -214,50 +206,57 @@ Promise.all([
   }));
 
   levelsContainer.appendChild(generateCards(careersData, "PDS"));
-
 })
 .catch(err => console.error("JSON Load Error:", err));
 
-/* =========================
-   GENERATE CARDS
-========================= */
-
-function generateCards(items, type){
-
+// Generate cards
+function generateCards(items, type) {
   const container = document.createElement('div');
-  container.classList.add('grid','morph-in');
+  container.classList.add('grid', 'morph-in');
 
   items.forEach(item => {
-
     const card = document.createElement('div');
     card.classList.add('card');
-
     card.style.backgroundColor = (type === "PDS" || type === "Area") ? item.color : "#333";
 
     const img = document.createElement('img');
     img.src = type === "Element" ? "images/icons/default.jpg" : `images/icons/${item.name}.jpg`;
-    img.alt = type === "Element" ? item.title : item.name;
+    img.alt = item.title;
     card.appendChild(img);
 
     const h2 = document.createElement('h2');
-    h2.textContent = type === "Element" ? item.title : item.name;
+    h2.textContent = item.title;
     card.appendChild(h2);
 
-    card.addEventListener('click', () => {
-      if(type === "PDS"){
+    card.addEventListener('click', async () => {
+      if(type === "PDS") {
         currentPDS = item;
-        pushLevel(generateCards(item.areas, "Area"));
-      } else if(type === "Area"){
-        pushLevel(generateCards(item.elements, "Element"));
-      } else if(type === "Element"){
-        openKiosk(item);
+        pushLevel(generateCards(item.areas,"Area"));
+      } else if(type === "Area") {
+        pushLevel(generateCards(item.elements,"Element"));
+      } else if(type === "Element") {
+        // Auto-create session and open board
+        const lessonCode = item.code;
+        try {
+          const res = await fetch("/api/session", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({lesson: lessonCode})
+          });
+          const data = await res.json();
+          const session_id = data.session_code;
+          window.open(`/teacher/board.html?session=${session_id}`,"_blank");
+        } catch(err) {
+          console.error(err);
+          alert("Could not start session");
+        }
       }
     });
 
-    // show progression data on hover for area cards
-    if(type === "Area"){
-      card.addEventListener("mouseenter", () => {
-        if(infoResetTimeout){ clearTimeout(infoResetTimeout); infoResetTimeout = null; }
+    // Area hover info
+    if(type==="Area"){
+      card.addEventListener("mouseenter",()=>{
+        if(infoResetTimeout){clearTimeout(infoResetTimeout); infoResetTimeout=null;}
         const pdsData = progressionData && progressionData[currentPDS.name];
         if(pdsData && pdsData[item.name]){
           const data = pdsData[item.name];
@@ -266,13 +265,12 @@ function generateCards(items, type){
           infoPanel.classList.add("active");
         }
       });
-
-      card.addEventListener("mouseleave", () => {
-        infoResetTimeout = setTimeout(() => {
+      card.addEventListener("mouseleave",()=>{
+        infoResetTimeout = setTimeout(()=>{
           infoPanel.classList.remove("active");
           infoTitle.textContent = "";
           infoText.textContent = "";
-        }, 300);
+        },300);
       });
     }
 
@@ -282,61 +280,59 @@ function generateCards(items, type){
   return container;
 }
 
-/* =========================
-   OPEN PRESENTATION
-========================= */
-
-function openKiosk(item){
-
-  const lessonCode = item.code;
-
-  window.open(
-    `/teacher/dashboard.html?lesson=${lessonCode}`,
-    "_blank"
-  );
-
-}
-
-/* =========================
-   NAVIGATION
-========================= */
-
 function pushLevel(levelDiv){
+  const backButton = document.getElementById("backButton");
+
   if(levelsContainer.firstChild){
+    // store current level before replacing
+    levelHistory.push(levelsContainer.firstChild);
+
     const current = levelsContainer.firstChild;
     current.classList.replace("morph-in","morph-out");
-    setTimeout(() => {
+
+    setTimeout(()=>{
       levelsContainer.removeChild(current);
-      levelHistory.push(current);
       levelsContainer.appendChild(levelDiv);
-    }, 500);
+    },500);
   } else {
     levelsContainer.appendChild(levelDiv);
   }
-}
 
-backButton.addEventListener('click', () => {
+  // show back button if we have history
   if(levelHistory.length > 0){
-    const current = levelsContainer.firstChild;
-    current.classList.replace("morph-in","morph-out");
-    setTimeout(() => {
-      levelsContainer.removeChild(current);
-      const previous = levelHistory.pop();
-      previous.classList.replace("morph-out","morph-in");
-      levelsContainer.appendChild(previous);
-    }, 500);
+    backButton.classList.remove("hidden");
   }
-});
-
-/* =========================
-   DARK MODE
-========================= */
+}
 
 darkModeToggle.addEventListener("click", () => {
   document.body.classList.toggle("dark");
-  darkModeToggle.textContent = document.body.classList.contains("dark") ? "Light Mode" : "Dark Mode";
+  darkModeToggle.textContent = document.body.classList.contains("dark")?"Light Mode":"Dark Mode";
 });
 
+document.getElementById("backButton").addEventListener("click", () => {
+  if(levelHistory.length === 0) return;
+
+  const current = levelsContainer.firstChild;
+  const previous = levelHistory.pop();
+
+  current.classList.replace("morph-in","morph-out");
+
+  setTimeout(()=>{
+    levelsContainer.removeChild(current);
+    previous.classList.remove("morph-out");
+    previous.classList.add("morph-in");
+    levelsContainer.appendChild(previous);
+  },500);
+
+  // hide button if we're back at root
+  if(levelHistory.length === 0){
+    document.getElementById("backButton").classList.add("hidden");
+  } 
+  if(levelHistory.length === 0){
+  currentPDS = null;
+  }
+});
 </script>
+
 </body>
 </html>

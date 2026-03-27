@@ -1,48 +1,65 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Learning Portal</title>
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="css/student.css">
 </head>
 <body>
+
   <div id="app">
+
+    <!-- LOGIN OVERLAY -->
     <div id="loginBackdrop">
-        <div id="loginCard" class="card">
-          
-          <!-- SESSION CODE INPUT -->
-          <div id="loginPanel">
-            <input id="accessCode" placeholder="Enter session code">
-            <button id="joinBtn">Join Lesson</button>
-          </div>
+      <div id="loginCard" class="card">
 
-          <!-- NAME SPINNER -->
-          <div id="nameSpinnerContainer" style="display:none;">
-            <p id="yourNameLabel">Your name will be:</p>
-            
-            <!-- Two-reel spinner display -->
-            <div id="spinnerDisplay">
-              <span id="adjDisplay">---</span> <span id="manuDisplay">---</span>
-            </div>
-            
-            <!-- Buttons on same row -->
-            <div class="spinner-buttons">
-              <button id="spinBtn">Spin</button>
-              <button id="okBtn" disabled>OK</button>
-            </div>
-
-            <!-- Attempts remaining -->
-            <p id="attemptsLeft"></p>
-          </div>
-
+        <!-- SESSION CODE INPUT -->
+         <h2>Join Lesson</h2>
+          <p class="login-subtext">Enter your session code to begin</p>
+        <div id="loginPanel">
+          <input id="accessCode" placeholder="Enter session code">
+          <button id="joinBtn">Join Lesson</button>
         </div>
+
+        <!-- NAME SPINNER -->
+        <div id="nameSpinnerContainer" class="hidden">
+          <p id="yourNameLabel">Your name will be:</p>
+
+          <div id="spinnerDisplay">
+            <span id="adjDisplay">---</span>
+            <span id="manuDisplay">---</span>
+          </div>
+
+          <div class="spinner-buttons">
+            <button id="spinBtn">Spin</button>
+            <button id="okBtn" disabled>OK</button>
+          </div>
+
+          <p id="attemptsLeft"></p>
+        </div>
+
+      </div>
     </div>
 
-    <!-- SLIDES WILL BE RENDERED HERE -->
-    <div id="slideContainer"></div>
+    <!-- HEADER -->
+    <header id="studentHeader" class="student-header hidden">
+      Welcome, <span id="studentNameDisplay"></span>
+    </header>
+
+    <!-- MAIN CONTENT (SLIDES) -->
+    <main id="mainContent">
+      <div id="slideContainer"></div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer id="studentFooter">
+      <p>Act Fast NL Ltd. &copy; 2024</p>
+    </footer>
+
   </div>
 
   <script src="/socket.io/socket.io.js"></script>
   <script src="js/student.js"></script>
+
 </body>
 </html>

@@ -47,7 +47,7 @@
     "slide_index": 4,
     "type": "kahoot",
     "title": "Kahoot Quiz",
-    "kahoot_link": "",
+    "kahoot_link": "https://play.kahoot.it/v2/?quizId=ac688e96-f58a-4b90-a5fe-f618f75e868a&hostId=8ab42b04-c138-4626-a4f6-03bb34a95d0b",
     "image": "/images/4.B.05/slide4_kahoot.jpg"
   },
   {
@@ -113,7 +113,7 @@
     "slide_index": 10,
     "type": "activity",
     "title": "Activity",
-    "text": "Create Your Life Map\nDesign a life map covering early adulthood, midlife, and later life. Include goals, roles, challenges, and how you would adapt to change.",
+    "text": "Create Your Life Map",
     "image": "/images/4.B.05/activity.jpg"
   },
   {
